@@ -6,7 +6,6 @@ const database = require("./database");
  * @property {String} role
  */
 
-
 /**
  * [login description]
  *
@@ -15,6 +14,7 @@ const database = require("./database");
  *
  * @return  {loginAnswer}       [return description]
  */
+
 module.exports.login = async function(username, pwd){
     const answer = await database.getOne("SELECT id, role FROM user WHERE user = ? AND password = ?", [username, pwd]);
     //regarder ce qui ce passe quand il ne trouve rien
