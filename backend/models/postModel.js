@@ -15,12 +15,11 @@ const database = require("./database");
 
 module.exports.getAllPosts = async function(){
     const answer = await database.getData("SELECT * FROM post");
-    //regarder ce qui se passe quand il ne trouve rien
     return answer;
 }
 
 module.exports.getOnePost = async function(){
-    const answer = await database.getData("SELECT * FROM post WHERE id = ?");
+    const answer = await database.getOne("SELECT * FROM post WHERE id = ?", [id]);
     return answer;
 }
 

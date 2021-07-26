@@ -1,11 +1,12 @@
 const express = require('express');
 
 const router = express.Router();
+//auth
 
 const postCtrl = require('../controllers/postCtrl');
 
-router.post('/', postCtrl.createPost);
-router.get('/from/:id/:quantity', postCtrl.getAllPosts);
-router.get('/:id', postCtrl.getOnePost);
+router.post('/', postCtrl.createPostCtrl);
+router.get('/', postCtrl.getAllPostsCtrl);
+router.get('/:id', postCtrl.getOnePostCtrl);
 
 module.exports = router;

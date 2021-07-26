@@ -13,9 +13,8 @@ const database = require("./database");
  * @return  {replyResponse}       [return description]
  */
 
-module.exports.getAllReplies = async function(){
+module.exports.getReplies = async function(){
     const answer = await database.getData("SELECT * FROM reply");
-    //regarder ce qui se passe quand il ne trouve rien
     return answer;
 }
 

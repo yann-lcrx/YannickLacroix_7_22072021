@@ -1,9 +1,10 @@
 const mariadb = require('mariadb');
 const pool = mariadb.createPool({
-    host: process.env.DB_HOST, 
+    host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_DATABASE,
+    allowPublicKeyRetrieval: true,
     connectionLimit: 5});
 
 async function request(sql, data=[]) {
@@ -11,7 +12,9 @@ async function request(sql, data=[]) {
   try {
 
 	conn = await pool.getConnection();
-	const rows = await conn.query("SELECT 1 as val");
+	const rows = await conn.query(sql, data=[]);
+  //const rows = await conn.query("SELECT 1 as val");
+  return rows;
 	// rows: [ {val: 1} ], meta: ...
 
 	// const res = await conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
