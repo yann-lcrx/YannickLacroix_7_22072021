@@ -6,7 +6,7 @@ const router = express.Router();
 const postCtrl = require('../controllers/postCtrl');
 
 router.post('/', postCtrl.createPostCtrl);
-router.get('/', postCtrl.getAllPostsCtrl);
+router.get('/from/:id/:quantity', postCtrl.getAllPostsCtrl);
 router.get('/:id', postCtrl.getOnePostCtrl);
 
 module.exports = router;

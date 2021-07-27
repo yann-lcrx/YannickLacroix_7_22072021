@@ -18,8 +18,8 @@ module.exports.getAllPosts = async function(){
     return answer;
 }
 
-module.exports.getOnePost = async function(){
-    const answer = await database.getOne("SELECT * FROM post WHERE id = ?", [id]);
+module.exports.getOnePost = async function(id){
+    const answer = await database.getOne(`SELECT * FROM post WHERE id = ${id}`);
     return answer;
 }
 
@@ -34,6 +34,6 @@ module.exports.getOnePost = async function(){
  * @return  {[postResponse]}           [return description]
  */
 module.exports.createPost = async function(id, id_user, content, title) {
-    const request = await database.postData("INSERT INTO post VALUES (?,?,?,?)", [id, id_user, content, title])
+    const request = await database.postData(`INSERT INTO post VALUES (${id}, ${id_user}, ${content}, ${title})`)
     return request;
 }

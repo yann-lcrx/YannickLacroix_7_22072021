@@ -17,7 +17,15 @@ const database = require("./database");
 
 module.exports.login = async function(username, pwd){
     const answer = await database.getOne("SELECT id, role FROM user WHERE user = ? AND password = ?", [username, pwd]);
-    //regarder ce qui ce passe quand il ne trouve rien
+    //regarder ce qui se passe quand il ne trouve rien
+    //convertir en chaine le role
+    answer.role = answer.role === 1 ? "admin" : "user";
+    return answer;
+}
+
+module.exports.signup = async function(username, pwd){
+    const answer = await database.getOne("SELECT id, role FROM user WHERE user = ? AND password = ?", [username, pwd]);
+    //regarder ce qui se passe quand il ne trouve rien
     //convertir en chaine le role
     answer.role = answer.role === 1 ? "admin" : "user";
     return answer;

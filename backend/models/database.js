@@ -12,10 +12,8 @@ async function request(sql, data=[]) {
   try {
 
 	conn = await pool.getConnection();
-	const rows = await conn.query(sql, data=[]);
-  //const rows = await conn.query("SELECT 1 as val");
+	const rows = await conn.query(sql, data);
   return rows;
-	// rows: [ {val: 1} ], meta: ...
 
 	// const res = await conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
 	// res: { affectedRows: 1, insertId: 1, warningStatus: 0 }
@@ -27,14 +25,14 @@ async function request(sql, data=[]) {
   }
 }
 
-async function getData(sql, data=[]){
-    const answer = await request(sql, data);
+async function getData(sql){
+    const answer = await request(sql);
     delete answer.meta;
     return answer;
 }
 
-async function getOne(sql, data=[]){
-    const answer = await getData(sql, data);
+async function getOne(sql){
+    const answer = await getData(sql);
     return answer[0];
 }
 
@@ -44,8 +42,8 @@ async function postData(sql, data=[]) {
     return answer;
 }
 
-async function deleteData(sql) {
-    const answer = await request(sql);
+async function deleteData(sql, data=[]) {
+    const answer = await request(sql, data);
 }
 
 module.exports.request = request;
