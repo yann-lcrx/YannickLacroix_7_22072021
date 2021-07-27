@@ -24,7 +24,7 @@ module.exports.login = async function(username, pwd){
 }
 
 module.exports.signup = async function(username, pwd){
-    const answer = await database.getOne("SELECT id, role FROM user WHERE user = ? AND password = ?", [username, pwd]);
+    const answer = await database.getOne(`INSERT INTO user VALUES(${username}, ${pwd}, ${email})`)
     //regarder ce qui se passe quand il ne trouve rien
     //convertir en chaine le role
     answer.role = answer.role === 1 ? "admin" : "user";
