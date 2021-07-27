@@ -5,7 +5,7 @@ const router = express.Router();
 
 const replyCtrl = require('../controllers/replyCtrl');
 
-router.post('/', replyCtrl.createReply);
-router.get('/', replyCtrl.getReplies);
+router.post('/', replyCtrl.createReplyCtrl);
+router.get('/', replyCtrl.getRepliesCtrl);
 
 module.exports = router;

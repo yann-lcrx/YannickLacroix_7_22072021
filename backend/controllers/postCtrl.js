@@ -13,7 +13,7 @@ exports.getOnePostCtrl = (req, res, next) => {
 }
 
 exports.createPostCtrl = (req, res, next) => {
-    Post.createPost(4, 1, 'oui', 'oui')
+    Post.createPost(req.query.id, req.query.id_user, req.query.content, req.query.title)
         .then(() => res.status(201).json({ message: 'Message publié !'}))
         .catch(error => res.status(400).json({ error }))
 }

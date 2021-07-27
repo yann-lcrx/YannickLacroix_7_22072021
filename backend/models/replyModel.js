@@ -13,16 +13,10 @@ const database = require("./database");
  * @return  {replyResponse}       [return description]
  */
 
-module.exports.getReplies = async function(){
-    const answer = await database.getData("SELECT * FROM reply");
+module.exports.getReplies = async function(id_post){
+    const answer = await database.getData(`SELECT * FROM reply WHERE id_post = ${id_post}`);
     return answer;
 }
-
-module.exports.getOneReply = async function(){
-    const answer = await database.getData("SELECT * FROM reply WHERE id = ?");
-    return answer;
-}
-
 
 /**
  * [postReply description]
@@ -34,7 +28,7 @@ module.exports.getOneReply = async function(){
  *
  * @return  {[replyResponse]}           [return description]
  */
-module.exports.postReply = async function(id, id_user, id_post, content) {
-    const request = await database.postData("INSERT INTO reply VALUES (?,?,?,?)", [id, id_user, id_post, content])
+module.exports.createReply = async function(id, id_user, id_post, content) {
+    const request = await database.postData(`INSERT INTO reply VALUES (${id},${id_post},${id_user},${content})`)
     return request;
 }
