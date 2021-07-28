@@ -1,13 +1,13 @@
 const User = require('../models/userModel.js');
 
 exports.loginCtrl = (req, res, next) => {
-    User.login(req.query.name, req.query.password)
+    User.login(req.body.name, req.body.password)
         .then(() => res.status(200).json())
         .catch(error => res.status(400).json({ error }))
 }
 
 exports.signupCtrl = (req, res, next) => {
-    User.signup(req.query.id, req.query.name, req.query.password, req.query.role, req.query.email)
+    User.signup(req.body.name, req.body.password, req.body.email)
         .then(() => res.status(201).json({ message: 'Utilisateur créé !'}))
         .catch(error => res.status(404).json({ error }))
 }

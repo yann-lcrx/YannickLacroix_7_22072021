@@ -25,13 +25,13 @@ async function request(sql, data=[]) {
   }
 }
 
-async function getData(sql){
+async function getData(sql, data=[]){
     const answer = await request(sql, data);
     delete answer.meta;
     return answer;
 }
 
-async function getOne(sql){
+async function getOne(sql, data=[]){
     const answer = await getData(sql, data);
     return answer[0];
 }

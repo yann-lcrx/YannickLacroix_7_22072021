@@ -7,7 +7,7 @@ exports.getRepliesCtrl = (req, res, next) => {
 }
 
 exports.createReplyCtrl = (req, res, next) => {
-    Reply.createReply(req.body.id, req.body.id_user, req.body.id_post, req.body.content)
+    Reply.createReply(req.body.id_user, req.body.id_post, req.body.content)
         .then(() => res.status(201).json({ message: 'Commentaire publié !'}))
         .catch(error => res.status(400).json({ error }))
 }

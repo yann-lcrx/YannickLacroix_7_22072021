@@ -34,7 +34,7 @@ module.exports.login = async function(username, pwd){
  * @return  {userResponse}            [return description]
  */
 module.exports.signup = async function(username, pwd, email){
-    const answer = await database.getOne(`INSERT INTO user VALUES(${username}, ${pwd}, ${email})`);
+    const answer = await database.getOne("INSERT INTO user (name, password, email) VALUES(?, ?, ?)", [username, pwd, email]);
     return answer;
 }
 
@@ -46,6 +46,6 @@ module.exports.signup = async function(username, pwd, email){
  * @return  {String}      [return description]
  */
 module.exports.deleteUser = async function(id){
-    const answer = await database.getOne(`DELETE FROM user WHERE id =${id}`)
+    const answer = await database.getOne("DELETE FROM user WHERE id = ?", [id])
     return answer;
 }
