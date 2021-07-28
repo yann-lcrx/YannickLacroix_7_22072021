@@ -26,14 +26,14 @@ module.exports.getOnePost = async function(id){
 /**
  * [createPost description]
  *
- * @param   {[Number]}  id       [id description]
- * @param   {[Number]}  id_user  [id_user description]
- * @param   {[String]}  content  [content description]
- * @param   {[String]}  title    [title description]
+ * @param   {Object}  postdata
+ * @param   {Number}  postdata.id_user  [id_user description]
+ * @param   {String}  postdata.content  [content description]
+ * @param   {String}  postdata.title    [title description]
  *
- * @return  {[postResponse]}           [return description]
+ * @return  {postResponse}           [return description]
  */
-module.exports.createPost = async function(id, id_user, content, title) {
-    const request = await database.postData(`INSERT INTO post VALUES (${id}, ${id_user}, ${content}, ${title})`)
+ module.exports.createPost = async function(postdata) {
+    const request = await database.postData(`INSERT INTO post VALUES (${postdata.id_user}, '${postdata.content}', '${postdata.title}')`)
     return request;
 }

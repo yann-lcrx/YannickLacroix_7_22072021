@@ -22,6 +22,7 @@ app.use((req, res, next) => {
   });
 
 //app.use(helmet());
+app.use(express.json());
 app.use(limiter);
 
 app.use('/api/posts', postRoutes);

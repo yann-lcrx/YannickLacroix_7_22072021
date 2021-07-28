@@ -21,14 +21,13 @@ module.exports.getReplies = async function(id_post){
 /**
  * [postReply description]
  *
- * @param   {[Number]}  id       [id description]
- * @param   {[Number]}  id_user  [id_user description]
- * @param   {[Number]}  id_post  [id_post description]
- * @param   {[String]}  content  [content description]
+ * @param   {Number}  id_user  [id_user description]
+ * @param   {Number}  id_post  [id_post description]
+ * @param   {String}  content  [content description]
  *
- * @return  {[replyResponse]}           [return description]
+ * @return  {replyResponse}           [return description]
  */
-module.exports.createReply = async function(id, id_user, id_post, content) {
-    const request = await database.postData(`INSERT INTO reply VALUES (${id},${id_post},${id_user},${content})`)
+module.exports.createReply = async function(id_user, id_post, content) {
+    const request = await database.postData(`INSERT INTO reply VALUES (${id_post},${id_user},'${content}')`)
     return request;
 }

@@ -5,7 +5,8 @@ const router = express.Router();
 
 const userCtrl = require('../controllers/userCtrl');
 
-router.post('/signup', userCtrl.signup)
-router.post('/login', userCtrl.login)
+router.post('/signup', userCtrl.signupCtrl);
+router.post('/login', userCtrl.loginCtrl);
+router.delete('/:id', userCtrl.deleteUserCtrl);
 
 module.exports = router;
