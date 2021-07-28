@@ -1,5 +1,5 @@
 const express = require('express');
-//const helmet = require('helmet');
+const helmet = require('helmet');
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
     next();
   });
 
-//app.use(helmet());
+app.use(helmet());
 app.use(express.json());
 app.use(limiter);
 
