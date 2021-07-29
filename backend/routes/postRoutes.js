@@ -1,8 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
-//auth
 
+const auth = require('../middleware/auth');
 const postCtrl = require('../controllers/postCtrl');
 
 /**
@@ -16,8 +16,8 @@ const postCtrl = require('../controllers/postCtrl');
  * 200:
  * description:
  */
-router.post('/', postCtrl.createPostCtrl);
-router.get('/from/:id/:quantity', postCtrl.getAllPostsCtrl);
-router.get('/:id', postCtrl.getOnePostCtrl);
+router.post('/', auth, postCtrl.createPostCtrl);
+router.get('/from/:id/:quantity', auth, postCtrl.getAllPostsCtrl);
+router.get('/:id', auth, postCtrl.getOnePostCtrl);
 
 module.exports = router;

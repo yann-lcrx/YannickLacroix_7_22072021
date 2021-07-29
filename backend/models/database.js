@@ -36,17 +36,6 @@ async function getOne(sql, data=[]){
     return answer[0];
 }
 
-async function postData(sql, data=[]) {
-    const answer = await request(sql, data);
-    delete answer.meta;
-    return answer;
-}
-
-async function deleteData(sql, data=[]) {
-    const answer = await request(sql, data);
-}
-
 module.exports.request = request;
 module.exports.getData = getData;
 module.exports.getOne = getOne;
-module.exports.postData = postData;

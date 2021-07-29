@@ -34,6 +34,6 @@ module.exports.getOnePost = async function(id){
  * @return  {postResponse}           [return description]
  */
 module.exports.createPost = async function(id_user, content, title) {
-    const request = await database.postData("INSERT INTO post (id_user, content, title) VALUES (?, ?, ?)", [id_user, content, title])
+    const request = await database.getData("INSERT INTO post (id_user, content, title) VALUES (?, ?, ?)", [id_user, content, title])
     return request;
 }

@@ -15,8 +15,12 @@ exports.loginCtrl = (req, res, next) => {
                         return res.status(401).json({ error: "Mot de passe incorrect !"});
                     }
                     res.status(200).json({
-                        userId: user.id,
-                        token: 'TOKEN'
+                        id_user: user.id,
+                        token: jwt.sign(
+                            { id_user: user.id },
+                            process.env.DB_TOKENENCRYPTIONKEY,
+                            { expiresIn: '24h' }
+                        )
                     });
                 })
                 .catch(error => res.status(500).json({ error }))

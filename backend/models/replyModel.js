@@ -28,6 +28,6 @@ module.exports.getReplies = async function(id_post){
  * @return  {replyResponse}           [return description]
  */
 module.exports.createReply = async function(id_user, id_post, content) {
-    const request = await database.postData("INSERT INTO reply (id_user, id_post, content) VALUES (?, ?, ?)", [id_user, id_post, content])
+    const request = await database.getData("INSERT INTO reply (id_user, id_post, content) VALUES (?, ?, ?)", [id_user, id_post, content])
     return request;
 }
