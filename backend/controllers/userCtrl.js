@@ -1,11 +1,27 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/userModel.js');
 
 exports.loginCtrl = (req, res, next) => {
     User.login(req.body.name, req.body.password)
-        .then(() => res.status(200).json())
-        .catch(error => res.status(400).json({ error }));
+        .then(user => {
+            if (!user) {
+                return res.status(401).json({ error: "Utilisateur non trouvé !" });
+            }
+            bcrypt.compare(req.body.password, user.password)
+                .then(valid => {
+                    if (!valid) {
+                        return res.status(401).json({ error: "Mot de passe incorrect !"});
+                    }
+                    res.status(200).json({
+                        userId: user.id,
+                        token: 'TOKEN'
+                    });
+                })
+                .catch(error => res.status(500).json({ error }))
+        })
+        .catch(error => res.status(500).json({ error }))
 }
 
 exports.signupCtrl = (req, res, next) => {
