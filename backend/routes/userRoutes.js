@@ -1,11 +1,9 @@
-const express = require('express');
-
-const router = express.Router();
-
-const auth = require('../middleware/auth');
-const userCtrl = require('../controllers/userCtrl');
+const auth        = require('../middleware/auth');
+const router      = require('express').Router();
+const userCtrl    = require('../controllers/userCtrl');
 
 router.post('/signup', userCtrl.signupCtrl);
+router.post('/signup/admin', userCtrl.createAdminCtrl);
 router.post('/login', userCtrl.loginCtrl);
 router.delete('/', auth, userCtrl.deleteUserCtrl);
 

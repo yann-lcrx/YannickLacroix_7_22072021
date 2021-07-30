@@ -13,8 +13,13 @@ exports.getOnePostCtrl = (req, res, next) => {
 }
 
 exports.createPostCtrl = (req, res, next) => {
-console.log(req.body);
     Post.createPost(req.body.id_user, req.body.content, req.body.title)
         .then(() => res.status(201).json({ message: 'Message publié !'}))
+        .catch(error => res.status(400).json({ error }))
+}
+
+exports.deletePostCtrl = (req, res, next) => {
+    Post.deletePost(req.params.id)
+        .then(() => res.status(201).json({ message: 'Message supprimé !'}))
         .catch(error => res.status(400).json({ error }))
 }

@@ -1,17 +1,14 @@
-const express = require('express');
-const helmet = require('helmet');
+const express       = require('express');
+const helmet        = require('helmet');
+const postRoutes    = require('./routes/postRoutes');
+const rateLimit     = require("express-rate-limit");
+const replyRoutes   = require('./routes/replyRoutes')
+const userRoutes    = require('./routes/userRoutes');
 
-const app = express();
-
-const postRoutes = require('./routes/postRoutes');
-const replyRoutes = require('./routes/replyRoutes')
-const userRoutes = require('./routes/userRoutes');
-
-const rateLimit = require("express-rate-limit");
-
+const app     = express();
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 120 // max requests per windowMs
+  max     : 120,            // max requests per windowMs
+  windowMs: 15 * 60 * 1000  // 15 minutes
 });
 
 app.use((req, res, next) => {
@@ -25,8 +22,8 @@ app.use(helmet());
 app.use(express.json());
 app.use(limiter);
 
-app.use('/api/posts', postRoutes);
+app.use('/api/auth',    userRoutes);
+app.use('/api/posts',   postRoutes);
 app.use('/api/replies', replyRoutes);
-app.use('/api/auth', userRoutes);
 
 module.exports = app;

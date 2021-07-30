@@ -37,3 +37,8 @@ module.exports.createPost = async function(id_user, content, title) {
     const request = await database.getData("INSERT INTO post (id_user, content, title) VALUES (?, ?, ?)", [id_user, content, title])
     return request;
 }
+
+module.exports.deletePost = async function(id) {
+    const request = await database.getData("DELETE FROM post WHERE id = ?", [id])
+    return request;
+}

@@ -17,7 +17,7 @@ const database = require("./database");
 module.exports.login = async function(username, pwd){
     const answer = await database.getOne("SELECT name, password, id, role FROM user WHERE name = ?", [username, pwd]);
     if (!answer) {
-        return null;
+        throw({status:404, msg:"Utilisateur non trouvé !"})
     }
     answer.role = answer.role === 1 ? "admin" : "user";
     return answer;
@@ -26,16 +26,28 @@ module.exports.login = async function(username, pwd){
 /**
  * [signup description]
  *
- * @param   {Number}  id        [id description]
  * @param   {String}  username  [username description]
- * @param   {String}  pwd       [pwd description]
- * @param   {Number}  role      [role description]
+ * @param   {String}  pwd       user password
  * @param   {String}  email     [email description]
  *
- * @return  {userResponse}            [return description]
+ * @return  {String}            confirmation message
  */
 module.exports.signup = async function(username, pwd, email){
     const answer = await database.getOne("INSERT INTO user (name, password, email, role) VALUES(?, ?, ?, 0)", [username, pwd, email]);
+    return answer;
+}
+
+/**
+ * [createAdmin description]
+ *
+ * @param   {String}  username  [username description]
+ * @param   {String}  pwd       [pwd description]
+ * @param   {String}  email     [email description]
+ *
+ * @return  {String}            confirmation message
+ */
+module.exports.createAdmin = async function(username, pwd, email){
+    const answer = await database.getOne("INSERT INTO user (name, password, email, role) VALUES(?, ?, ?, 1)", [username, pwd, email]);
     return answer;
 }
 

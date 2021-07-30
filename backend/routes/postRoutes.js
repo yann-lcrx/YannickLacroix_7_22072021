@@ -1,9 +1,6 @@
-const express = require('express');
-
-const router = express.Router();
-
-const auth = require('../middleware/auth');
-const postCtrl = require('../controllers/postCtrl');
+const auth        = require('../middleware/auth');
+const postCtrl    = require('../controllers/postCtrl');
+const router      = require('express').Router();
 
 /**
  * [createPostCtrl description]
@@ -19,5 +16,6 @@ const postCtrl = require('../controllers/postCtrl');
 router.post('/', auth, postCtrl.createPostCtrl);
 router.get('/from/:id/:quantity', auth, postCtrl.getAllPostsCtrl);
 router.get('/:id', auth, postCtrl.getOnePostCtrl);
+router.delete('/:id', auth, postCtrl.deletePostCtrl);
 
 module.exports = router;
