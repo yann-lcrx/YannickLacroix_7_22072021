@@ -39,7 +39,7 @@ exports.signupCtrl = (req, res, next) => {
 }
 
 exports.deleteUserCtrl = (req, res, next) => {
-    User.deleteUser(req.params.id)
+    User.deleteUser(req.body.id)
         .then(() => res.status(201).json({ message: 'Votre compte a bien été supprimé.'}))
         .catch(error => res.status(404).json({ error }));
 }

@@ -7,7 +7,10 @@ module.exports = (req, res, next) => {
     const id_user = decodedToken.id_user;
     if (req.body.id_user && req.body.id_user !== id_user) {
       throw 'Invalid user ID';
-    } else {
+    } else if (req.body.id && req.body.id !== id_user) {
+      throw 'Invalid user ID';
+    }
+    else {
       next();
     }
   } catch {
