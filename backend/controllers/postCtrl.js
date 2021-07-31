@@ -19,7 +19,7 @@ exports.createPostCtrl = (req, res, next) => {
 }
 
 exports.deletePostCtrl = (req, res, next) => {
-    Post.deletePost(req.params.id)
+    Post.deletePost(req.params.id, req.body.id_user)
         .then(() => res.status(201).json({ message: 'Message supprimé !'}))
         .catch(error => res.status(400).json({ error }))
 }

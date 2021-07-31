@@ -31,3 +31,8 @@ module.exports.createReply = async function(id_user, id_post, content) {
     const request = await database.getData("INSERT INTO reply (id_user, id_post, content) VALUES (?, ?, ?)", [id_user, id_post, content])
     return request;
 }
+
+module.exports.deleteReply = async function(id, id_user) {
+    const request = await database.getData("DELETE FROM reply WHERE id = ? AND id_user = ?", [id, id_user])
+    return request;
+}

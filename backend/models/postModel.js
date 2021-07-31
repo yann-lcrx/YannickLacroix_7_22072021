@@ -34,11 +34,14 @@ module.exports.getOnePost = async function(id){
  * @return  {postResponse}           [return description]
  */
 module.exports.createPost = async function(id_user, content, title) {
-    const request = await database.getData("INSERT INTO post (id_user, content, title) VALUES (?, ?, ?)", [id_user, content, title])
-    return request;
+    const newPost = await database.getData("INSERT INTO post (id_user, content, title) VALUES (?, ?, ?)", [id_user, content, title])
+    return newPost;
 }
 
-module.exports.deletePost = async function(id) {
-    const request = await database.getData("DELETE FROM post WHERE id = ?", [id])
-    return request;
+module.exports.deletePost = async function(id, id_user) {
+    const postExists = await database.getOne("SELECT * FROM post WHERE id = ? AND id_user = ?", [id, id_user])
+    if (!postExists) {
+        throw({status:404, msg:"Message non trouvé !"})
+    }
+    await database.getData("DELETE FROM post WHERE id = ? AND id_user = ?", [id, id_user])
 }

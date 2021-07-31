@@ -11,3 +11,9 @@ exports.createReplyCtrl = (req, res, next) => {
         .then(() => res.status(201).json({ message: 'Commentaire publié !'}))
         .catch(error => res.status(400).json({ error }))
 }
+
+exports.deleteReplyCtrl = (req, res, next) => {
+    Reply.deleteReply(req.params.id, req.body.id_user)
+        .then(() => res.status(201).json({ message: 'Message supprimé !'}))
+        .catch(error => res.status(400).json({ error }))
+}
