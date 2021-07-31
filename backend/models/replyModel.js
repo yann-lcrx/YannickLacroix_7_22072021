@@ -33,6 +33,9 @@ module.exports.createReply = async function(id_user, id_post, content) {
 }
 
 module.exports.deleteReply = async function(id, id_user) {
-    const request = await database.getData("DELETE FROM reply WHERE id = ? AND id_user = ?", [id, id_user])
-    return request;
+    const replyExists = await database.getOne("SELECT * FROM reply WHERE id = ? AND id_user = ?", [id, id_user])
+    if (!replyExists) {
+        throw error;
+    }
+    await database.getData("DELETE FROM reply WHERE id = ? AND id_user = ?", [id, id_user])
 }

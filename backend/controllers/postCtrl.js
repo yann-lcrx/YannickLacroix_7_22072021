@@ -21,5 +21,5 @@ exports.createPostCtrl = (req, res, next) => {
 exports.deletePostCtrl = (req, res, next) => {
     Post.deletePost(req.params.id, req.body.id_user)
         .then(() => res.status(201).json({ message: 'Message supprimé !'}))
-        .catch(error => res.status(400).json({ error }))
+        .catch(error => res.status(404).json({ error: "Ce message n'existe pas. Veuillez modifier votre requête et réessayer." }))
 }
