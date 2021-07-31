@@ -1,4 +1,13 @@
 const database = require("./database");
+const validator = require("validator");
+
+const blacklist = '=';
+function sanitize(stringsToSanitize) {
+    //for (let string in stringsToSanitize) {
+        const sanitizedString = validator.blacklist(stringsToSanitize, blacklist);
+        return sanitizedString;
+    //}
+}
 
 /**
  * @typedef {Object} loginAnswer
@@ -33,7 +42,7 @@ module.exports.login = async function(username, pwd){
  * @return  {String}            confirmation message
  */
 module.exports.signup = async function(username, pwd, email){
-    const answer = await database.getOne("INSERT INTO user (name, password, email, role) VALUES(?, ?, ?, 0)", [username, pwd, email]);
+    const answer = await database.getOne("INSERT INTO user (name, password, email, role) VALUES(?, ?, ?, 0)", [sanitize(username), pwd, email]);
     return answer;
 }
 
