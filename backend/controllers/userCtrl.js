@@ -54,5 +54,5 @@ exports.deleteUserCtrl = (req, res, next) => {
     .then(() =>
       res.status(201).json({ message: "Le compte a bien été supprimé." })
     )
-    .catch((error) => res.status(404).json({ error }));
+    .catch((error) => res.status(404).json({ error: "Le compte que vous souhaitez supprimer n'existe pas ou a déjà été supprimé." }));
 };

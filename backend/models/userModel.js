@@ -1,12 +1,10 @@
 const database = require("./database");
 const validator = require("validator");
 
-const blacklist = '=';
-function sanitize(stringsToSanitize) {
-    //for (let string in stringsToSanitize) {
+const usernameBlacklist = '=@;';
+function sanitize(stringsToSanitize, blacklist) {
         const sanitizedString = validator.blacklist(stringsToSanitize, blacklist);
         return sanitizedString;
-    //}
 }
 
 /**
@@ -42,7 +40,7 @@ module.exports.login = async function(username, pwd){
  * @return  {String}            confirmation message
  */
 module.exports.signup = async function(username, pwd, email){
-    const answer = await database.getOne("INSERT INTO user (name, password, email, role) VALUES(?, ?, ?, 0)", [sanitize(username), pwd, email]);
+    const answer = await database.getOne("INSERT INTO user (name, password, email, role) VALUES(?, ?, ?, 0)", [sanitize(username, usernameBlacklist), pwd, email]);
     return answer;
 }
 
@@ -56,7 +54,7 @@ module.exports.signup = async function(username, pwd, email){
  * @return  {String}            confirmation message
  */
 module.exports.createAdmin = async function(username, pwd, email){
-    const answer = await database.getOne("INSERT INTO user (name, password, email, role) VALUES(?, ?, ?, 1)", [username, pwd, email]);
+    const answer = await database.getOne("INSERT INTO user (name, password, email, role) VALUES(?, ?, ?, 1)", [(username, usernameBlacklist), pwd, email]);
     return answer;
 }
 
@@ -68,6 +66,9 @@ module.exports.createAdmin = async function(username, pwd, email){
  * @return  {String}      [return description]
  */
 module.exports.deleteUser = async function(id){
-    const answer = await database.getOne("DELETE FROM user WHERE id = ?", [id])
-    return answer;
+    const userExists = await database.getOne("SELECT * FROM user WHERE id = ?", [id])
+    if (!userExists) {
+        throw error;
+    }
+    await database.getOne("DELETE FROM user WHERE id = ?", [id])
 }
