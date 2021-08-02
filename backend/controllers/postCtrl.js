@@ -1,7 +1,7 @@
 const Post = require('../models/postModel.js');
 
 exports.getAllPostsCtrl = (req, res, next) => {
-    Post.getAllPosts()
+    Post.getAllPosts(req.params.id, req.params.quantity)
         .then(posts => res.status(200).json(posts))
         .catch(error => res.status(400).json({ error }))
 }

@@ -31,28 +31,31 @@ exports.signupCtrl = async (req, res, next) => {
       throw({ status: 401, msg:"Veuillez rentrer une adresse mail valide."})
     }
     const hash = await bcrypt.hash(req.body.password, 10);
-    await User.signup(req.body.name, hash, req.body.email);
+    await User.signup(req.body.name, hash, req.body.email, 0);
     res.status(201).json({ message: "Utilisateur créé !" })
   } catch(err) {
     res.status(err.status).json({ error: err.msg })
   }
 }
 
-exports.createAdminCtrl = (req, res, next) => {
-  bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => {
-      User.createAdmin(req.body.name, hash, req.body.email)
-        .then(() => res.status(201).json({ message: "Utilisateur créé ! Privilèges administrateurs accordés." }))
-        .catch((error) => res.status(404).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ error }));
-};
+exports.createAdminCtrl = async (req, res, next) => {
+  try {
+    const emailIsValid = await validator.isEmail(req.body.email);
+    if (!emailIsValid) {
+      throw({ status: 401, msg:"Veuillez rentrer une adresse mail valide."})
+    }
+    const hash = await bcrypt.hash(req.body.password, 10);
+    await User.signup(req.body.name, hash, req.body.email, 1);
+    res.status(201).json({ message: "Administrateur créé !" })
+  } catch(err) {
+    res.status(err.status).json({ error: err.msg })
+  }
+}
 
 exports.deleteUserCtrl = (req, res, next) => {
   User.deleteUser(req.body.id)
     .then(() =>
       res.status(201).json({ message: "Le compte a bien été supprimé." })
     )
-    .catch((error) => res.status(404).json({ error: "Le compte que vous souhaitez supprimer n'existe pas ou a déjà été supprimé." }));
+    .catch(() => res.status(404).json({ error: "Le compte que vous souhaitez supprimer n'existe pas ou a déjà été supprimé." }));
 };
