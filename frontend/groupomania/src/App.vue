@@ -1,10 +1,22 @@
 <template>
   <div id="app">
+    <header class="header">
+      <img src="./assets/icon-left-font-monochrome-white.png" alt="logo groupomania" class="header__logo">
+    </header>
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Vue Home</router-link> |
+      <router-link to="/about">About</router-link> |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/signup">Signup</router-link> |
+      <router-link to="/homepage">Home</router-link> |
+      <router-link to="/newMessage">New Message</router-link> |
+      <router-link to="/readMessage">Read Message</router-link> |
+      <router-link to="/myAccount">Account settings</router-link> |
     </div>
     <router-view />
+    <footer>
+      <p>Copyright Groupomania 2021, tous droits réservés.</p>
+    </footer>
   </div>
 </template>
 
@@ -15,6 +27,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: #eeeeee;
 }
 
 #nav {
@@ -29,4 +42,28 @@
     }
   }
 }
+
+.header {
+  $col-layout: #080f88;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  background-color: #080f88;
+  &__logo{
+    max-width: 200px;
+    align-self: center;
+    margin-left: 12px;
+  }
+}
+footer {
+  background-color: #000077;
+  color: #fff;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  p {
+    align-self: center;
+  }
+}
+
 </style>
