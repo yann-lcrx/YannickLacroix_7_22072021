@@ -2,16 +2,19 @@
   <div id="app">
     <header class="header">
       <img src="./assets/icon-left-font-monochrome-white.png" alt="logo groupomania" class="header__logo">
+      <div v-if="isConnected()">
+          <p>Profil</p>
+          <p>Se déconnecter</p>
+      </div>
     </header>
     <div id="nav">
       <router-link to="/">Vue Home</router-link> |
-      <router-link to="/about">About</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/signup">Signup</router-link> |
       <router-link to="/homepage">Home</router-link> |
-      <router-link to="/newMessage">New Message</router-link> |
-      <router-link to="/readMessage">Read Message</router-link> |
-      <router-link to="/myAccount">Account settings</router-link> |
+      <router-link to="/writenew">New Message</router-link> |
+      <router-link to="/message">Read Message</router-link> |
+      <router-link to="/profile">Account settings</router-link> |
     </div>
     <router-view />
     <footer>
@@ -19,6 +22,34 @@
     </footer>
   </div>
 </template>
+
+<script>
+/*import Vue from "vue"
+    const app = new Vue({
+        el: '#app',
+        data: {
+            connected: false,
+        }
+    })
+  export default {}*/
+
+  export default {
+    name:"",
+    components : {
+      
+    },
+  data() {
+    return {
+      connected: false
+    } 
+  },
+  methods : {
+    isConnected(){
+      return false;
+    }
+  }
+  }
+</script>
 
 <style lang="scss">
 #app {
