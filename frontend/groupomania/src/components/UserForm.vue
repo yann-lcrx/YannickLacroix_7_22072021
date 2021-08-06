@@ -6,8 +6,9 @@
                 <img src="../assets/icon.png" alt="icône Groupomania">
             </div>
             <form>
-                    <TextInput id="username" placeholder="Nom d'utilisateur"/>
-                    <TextInput id="password" type="password" placeholder="Mot de passe"/>
+                    <div v-for="(field, index) in fieldList" :key="index">
+                        <TextInput :id="field.id" :placeholder="field.placeholder" :type="field.type"/>
+                    </div>
                     <div class="buttons">
                         <Button link="#" :type="buttonClass" :text="buttonLabel" />
                     </div>
@@ -21,18 +22,25 @@
     import Button from "./Button.vue";
 
     export default {
-    name: "UserForm",
-    components: {
-        TextInput, Button
-    },
-    props: {
-        formType: String,
-        buttonLabel: String,
-        buttonClass: String,
-        fieldList: {
-            Type: Object
+        name: "UserForm",
+        components: {
+            TextInput, Button
+        },
+        data() {
+            return {
+                fieldList: [
+                    {id: "username", placeholder: "nom d'utilisateur"},
+                    {id: "password", placeholder: "mot de passe"},
+                    {id: "email", type: "email", placeholder: "adresse électronique"}
+                ]
+            }
+        },
+        props: {
+            formType: String,
+            buttonLabel: String,
+            buttonClass: String,
+            //fieldList: Array
         }
-    }
 };
 </script>
 
@@ -42,10 +50,12 @@
             display: flex;
             margin-bottom: 32px;
             justify-content: space-between;
-            form {
-                flex: 0.9;
-            }
         }
+    }
+    form {
+        flex: 0.9;
+        max-width: 500px;
+        margin-top: 24px;
     }
     h1 {
         text-align: initial;

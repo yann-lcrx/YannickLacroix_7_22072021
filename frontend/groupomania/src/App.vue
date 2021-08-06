@@ -7,16 +7,18 @@
           <p>Se déconnecter</p>
       </div>
     </header>
-    <div id="nav">
-      <router-link to="/">Vue Home</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/signup">Signup</router-link> |
-      <router-link to="/homepage">Home</router-link> |
-      <router-link to="/writenew">New Message</router-link> |
-      <router-link to="/message">Read Message</router-link> |
-      <router-link to="/profile">Account settings</router-link> |
+    <div class="container">
+      <div id="nav">
+        <router-link to="/">Vue Home</router-link> |
+        <router-link to="/login">Login</router-link> |
+        <router-link to="/signup">Signup</router-link> |
+        <router-link to="/homepage">Home</router-link> |
+        <router-link to="/writenew">New Message</router-link> |
+        <router-link to="/message">Read Message</router-link> |
+        <router-link to="/profile">Account settings</router-link> |
+      </div>
+      <router-view />
     </div>
-    <router-view />
     <footer>
       <p>Copyright Groupomania 2021, tous droits réservés.</p>
     </footer>
@@ -56,7 +58,6 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   background-color: #eeeeee;
 }
@@ -86,6 +87,12 @@
     margin-left: 12px;
   }
 }
+
+.container {
+  max-width: 90%;
+  margin: auto;
+}
+
 footer {
   background-color: #000077;
   color: #fff;

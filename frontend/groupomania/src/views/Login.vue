@@ -1,6 +1,8 @@
 <template>
-    <div class="container">
-        <UserForm formType="login" buttonLabel="Se connecter" buttonClass="btn btn--login"/>    
+    <div>
+        <UserForm fieldList="[{id: 'username', placeholder: 'nom d'utilisateur'},
+                    {id: 'password', placeholder: 'mot de passe'},
+                    {id: 'email', type: 'email', placeholder: 'adresse électronique'}]" formType="login" buttonLabel="Se connecter" buttonClass="btn btn--login"/>    
     </div>
 </template>
 
@@ -14,11 +16,3 @@
         },
 };
 </script>
-
-
-<style lang="scss" scoped>
-    .container {
-        max-width: 90%;
-        margin: auto;
-    }
-</style>
