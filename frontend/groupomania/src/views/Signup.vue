@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <UserForm formType="signup" buttonLabel="S'inscrire" buttonClass="btn btn--signup"/>    
     </div>
 </template>

@@ -5,13 +5,14 @@
             <div>
                 <img src="../assets/icon.png" alt="icône Groupomania">
             </div>
-            <form>
+            <form class="card">
                     <div v-for="(field, index) in fieldList" :key="index">
                         <TextInput :id="field.id" :placeholder="field.placeholder" :type="field.type"/>
                     </div>
                     <div class="buttons">
                         <Button link="#" :type="buttonClass" :text="buttonLabel" />
                     </div>
+                    <p>Mot de passe oublié ? Cliquez <a href="google.com">ici</a>.</p>
             </form>
         </div>
     </section>
@@ -56,6 +57,7 @@
         flex: 0.9;
         max-width: 500px;
         margin-top: 24px;
+        padding: 16px
     }
     h1 {
         text-align: initial;
@@ -75,9 +77,14 @@
     }
 
     .buttons {
-        width: 100%;
         max-width: 600px;
         margin: auto;
         margin-top: 24px;
+        justify-content: center;
+        display: flex;
+        margin-bottom: 32px
+    }
+    a {
+        text-decoration: underline;
     }
 </style>

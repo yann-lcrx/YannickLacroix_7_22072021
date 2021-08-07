@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="button">
         <a :class="type" :href="link">{{ text }}</a>
     </div>
 </template>
@@ -16,15 +16,22 @@ export default {
 </script>
 
 <style lang="scss">
+    div {
+        text-align: center;
+    }
     .btn {
         color: #fefefe;
         text-decoration: none;
-        padding: 10px;
+        padding: 12px;
         border-radius: 6px;
         box-shadow: 4px 4px 6px 1px rgba(22,22,22,0.7);
         font-weight: bold;
         &--login{
             background-color: #080f88;
+        }
+        &--write{
+            background-color: #080f88;
+            display: inline-block;
         }
         &--signup{
             background-color: #aa2f18;

@@ -26,8 +26,10 @@
         margin-bottom: 12px;
         width: 100%;
         font-size: 1.3rem;
-        padding: 6px;
+        padding-top: 6px;
+        padding-bottom: 6px;
         border-radius: 8px;
         border: 1px gray solid;
+        text-indent: 8px;
     }
 </style>

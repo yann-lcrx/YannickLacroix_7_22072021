@@ -19,32 +19,18 @@
       </div>
       <router-view />
     </div>
-    <footer>
-      <p>Copyright Groupomania 2021, tous droits réservés.</p>
-    </footer>
+    <Footer />
   </div>
 </template>
 
 <script>
-/*import Vue from "vue"
-    const app = new Vue({
-        el: '#app',
-        data: {
-            connected: false,
-        }
-    })
-  export default {}*/
+import Footer from '@/components/Footer';
 
   export default {
     name:"",
     components : {
-      
+      Footer
     },
-  data() {
-    return {
-      connected: false
-    } 
-  },
   methods : {
     isConnected(){
       return false;
@@ -89,19 +75,29 @@
 }
 
 .container {
-  max-width: 90%;
+  max-width: 80%;
   margin: auto;
+  > div {
+    max-width: 1240px;
+    margin: auto;
+  }
+  > section {
+    max-width: 1240px;
+    margin: auto;
+  }
 }
 
-footer {
-  background-color: #000077;
-  color: #fff;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  p {
-    align-self: center;
-  }
+.card {
+  padding: 10px;
+  background-color: #fefefe;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  border: 1px solid #cecece;
+}
+
+a {
+  color: unset;
+  text-decoration: none;
 }
 
 </style>
