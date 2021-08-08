@@ -57,7 +57,8 @@
         flex: 0.9;
         max-width: 500px;
         margin-top: 24px;
-        padding: 16px
+        padding: 16px;
+        text-align: center
     }
     h1 {
         text-align: initial;

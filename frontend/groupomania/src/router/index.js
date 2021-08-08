@@ -35,7 +35,7 @@ const routes = [
       import("../views/ReadMessage.vue"),
   },
   {
-    path: "/writenew",
+    path: "/new",
     name: "NewMessage",
     component: () =>
       import("../views/NewMessage.vue"),

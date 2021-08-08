@@ -22,10 +22,8 @@ export default {
         background-color: #000077;
         color: #fff;
         height: 100px;
-        padding-top: 12px
-    }
-    p {
-        align-self: center;
+        padding-top: 12px;
+        text-align: center;
     }
     ul {
         list-style-type: none;

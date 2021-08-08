@@ -8,7 +8,7 @@
 </style>
 
 <script>
-    import MessageList from "@/components/MessageList"
+    import MessageList from "@/components/MessageList";
 
     export default {
         name: "Homepage",

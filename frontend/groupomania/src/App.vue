@@ -13,9 +13,10 @@
         <router-link to="/login">Login</router-link> |
         <router-link to="/signup">Signup</router-link> |
         <router-link to="/homepage">Home</router-link> |
-        <router-link to="/writenew">New Message</router-link> |
-        <router-link to="/message">Read Message</router-link> |
+        <router-link to="/new">New</router-link> |
+        <router-link to="/message">Read</router-link> |
         <router-link to="/profile">Account settings</router-link> |
+        
       </div>
       <router-view />
     </div>
@@ -27,7 +28,7 @@
 import Footer from '@/components/Footer';
 
   export default {
-    name:"",
+    name:"App",
     components : {
       Footer
     },

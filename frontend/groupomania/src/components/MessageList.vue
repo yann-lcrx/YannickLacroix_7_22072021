@@ -10,7 +10,7 @@
                 <div class="card">
                     <h1>Accueil</h1>
                     <p>Bienvenue sur votre page d'accueil.</p>
-                    <Button text="Ecrire un message" type="btn btn--write" link="writenew"/>
+                    <Button text="Ecrire un message" type="btn btn--message" link="new"/>
                 </div>
                 <Footer />
             </div>

@@ -9,13 +9,13 @@ export default {
     name: "Button",
     props: {
         type: String,
-        link: URL,
+        link: String,
         text: String
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     div {
         text-align: center;
     }
@@ -29,7 +29,7 @@ export default {
         &--login{
             background-color: #080f88;
         }
-        &--write{
+        &--message{
             background-color: #080f88;
             display: inline-block;
         }
