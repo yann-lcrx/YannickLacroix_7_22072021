@@ -1,6 +1,6 @@
 <template>
     <div>
-        <UserForm fieldList="[{id: 'username', placeholder: 'nom d'utilisateur'},
+        <UserForm link="/homepage" fieldList="[{id: 'username', placeholder: 'nom d'utilisateur'},
                     {id: 'password', placeholder: 'mot de passe'},
                     {id: 'email', type: 'email', placeholder: 'adresse électronique'}]" formType="login" buttonLabel="Se connecter" buttonClass="btn btn--login"/>    
     </div>

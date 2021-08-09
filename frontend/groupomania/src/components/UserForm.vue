@@ -6,12 +6,10 @@
                 <img src="../assets/icon.png" alt="icône Groupomania">
             </div>
             <form class="card">
-                    <div v-for="(field, index) in fieldList" :key="index">
-                        <TextInput :maxlength="field.maxlength" :id="field.id" :placeholder="field.placeholder" :type="field.type"/>
-                    </div>
+                    <TextInput v-for="(field, index) in fieldList" :key="index" :maxlength="field.maxlength" :id="field.id" :placeholder="field.placeholder" :type="field.type"/>
                     <div class="buttons">
-                        <Button link="#" :type="buttonClass" :text="buttonLabel" />
-                    </div>
+                        <Button :link="link" :type="buttonClass" :text="buttonLabel" />
+                    </div>  
                     <p>Mot de passe oublié ? Cliquez <a href="google.com">ici</a>.</p>
             </form>
         </div>
@@ -40,6 +38,7 @@
             formType: String,
             buttonLabel: String,
             buttonClass: String,
+            link: String    
             //fieldList: Array
         }
 };

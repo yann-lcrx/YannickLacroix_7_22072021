@@ -1,6 +1,6 @@
 <template>
     <div class="button">
-        <a :class="type" :href="link">{{ text }}</a>
+        <router-link :to="link"><a :class="type">{{ text }}</a></router-link>
     </div>
 </template>
 

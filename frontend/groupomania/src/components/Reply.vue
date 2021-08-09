@@ -1,8 +1,11 @@
 <template>
     <a href="">
         <div class="reply card">
-            <p>Lorem ipsum</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div class="reply__info">
+                <p>{{ author }}</p>
+                <router-link to="/message"><p>Supprimer</p></router-link>
+            </div>
+            <p>{{ text }}</p>
         </div>
     </a>    
 </template>
@@ -11,7 +14,9 @@
 export default {
         name: "Reply",
         props: {
-            
+            isAuthorized: Boolean,
+            author: String,
+            text: String
         },
     }
 </script>
@@ -19,8 +24,21 @@ export default {
 <style lang="scss" scoped>
     .reply{
         text-align: justify;
-        > p:first-child {
-            font-weight: bold;
+        &__info {
+            display: flex;
+            flex-flow: nowrap row;
+            justify-content: space-between;
+            align-content: center;
+            :first-child {
+                font-weight: bold;
+            }
+            :nth-child(2) {
+                align-self: center;
+                text-decoration: underline;
+                font-size: .9rem;
+                color: darken(#aa2f18, 6);
+                font-weight: unset
+            }
         }
     }
 </style>
