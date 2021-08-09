@@ -7,7 +7,7 @@
             </div>
             <form class="card">
                     <div v-for="(field, index) in fieldList" :key="index">
-                        <TextInput :id="field.id" :placeholder="field.placeholder" :type="field.type"/>
+                        <TextInput :maxlength="field.maxlength" :id="field.id" :placeholder="field.placeholder" :type="field.type"/>
                     </div>
                     <div class="buttons">
                         <Button link="#" :type="buttonClass" :text="buttonLabel" />
@@ -30,10 +30,10 @@
         data() {
             return {
                 fieldList: [
-                    {id: "username", placeholder: "nom d'utilisateur"},
-                    {id: "password", placeholder: "mot de passe"},
+                    {id: "username", placeholder: "nom d'utilisateur", maxlength: 32},
+                    {id: "password", placeholder: "mot de passe", maxlength: 32},
                     {id: "email", type: "email", placeholder: "adresse électronique"}
-                ]
+                ],
             }
         },
         props: {

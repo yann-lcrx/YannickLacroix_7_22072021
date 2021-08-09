@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input :id="id" :placeholder="placeholder" :type="type">
+        <input :id="id" :placeholder="placeholder" :type="type" :maxlength="maxlength">
     </div>
 </template>
 
@@ -16,7 +16,8 @@
             },
             type: {
                 Type: String
-            }
+            },
+            maxlength: Number
         },
     }
 </script>
@@ -29,7 +30,7 @@
         padding-top: 6px;
         padding-bottom: 6px;
         border-radius: 8px;
-        border: 1px gray solid;
+        border: 1px #cecece solid;
         text-indent: 8px;
     }
 </style>

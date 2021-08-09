@@ -1,13 +1,14 @@
 <template>
     <section>
-        <Message />
-        <form>
-            <textarea name="write-message" id="" cols="30" rows="10"></textarea>
-            <Button type="btn btn--message" text="Répondre" link="message"/>
-        </form>
-        <Reply />
-        <Reply />
-        <Reply />
+        <Message isAuthorized />
+        <SubmitForm isPostingMessage=false rows=2 action="Répondre"/>
+
+        <div class="Replies">
+            <h3>Commentaires</h3>
+            <Reply />
+            <Reply />
+            <Reply />
+        </div>
 
     </section>
 </template>
@@ -25,14 +26,14 @@
 </style>
 
 <script>
+    import SubmitForm from "@/components/SubmitForm";
     import Message from "@/components/Message";
-    import Button from  "@/components/Button";
     import Reply from "@/components/Reply";
 
     export default {
             name: "ReadMessage",
             components: {
-                Message, Button, Reply
+                Message, SubmitForm, Reply
             }
         }
 </script>

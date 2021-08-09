@@ -36,5 +36,9 @@ export default {
         &--signup{
             background-color: #aa2f18;
         }
+        &--delete{
+            background-color: #aa2f18;
+            display: inline-block;
+        }
     }
 </style>
