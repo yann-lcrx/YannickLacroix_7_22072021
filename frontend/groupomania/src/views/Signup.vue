@@ -1,6 +1,6 @@
 <template>
     <div>
-        <UserForm link="/homepage" formType="signup" buttonLabel="S'inscrire" buttonClass="btn btn--signup"/>    
+        <UserForm link="/homepage" formType="signup" buttonLabel="S'inscrire" buttonClass="btn btn--red"/>    
     </div>
 </template>
 

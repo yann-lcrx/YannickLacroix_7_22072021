@@ -1,13 +1,13 @@
 <template>
-    <section class="profile">
+    <section class="profile card">
         <h1>Profil</h1>
         <div>
             <p>Nom d'utilisateur: <span class="profile__info">{{username}}</span></p>
             <p>Adresse électronique: <span class="profile__info">{{email}}</span></p>
             <p>Rôle: <span class="profile__info">{{role}}</span></p>
             <div class="profile__buttons">
-                <Button link="/login" type="btn btn--delete" text="Supprimer le compte" />
-                <Button link="/homepage" type="btn btn--message" text="Retour" />
+                <Button link="/login" type="btn btn--red" text="Supprimer le compte" />
+                <Button link="/homepage" type="btn btn--blue" text="Retour" />
             </div>
         </div>
     </section>

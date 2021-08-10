@@ -3,7 +3,7 @@
     <form>
         <TextInput v-if="isPostingMessage == true" :maxlength="maxlength" id="post-message__title" placeholder="Titre" />
         <textarea name="write-message" :rows="rows" :placeholder="placeholder"></textarea>
-        <Button type="btn btn--message" :text="action" link="message"/>
+        <Button type="btn btn--blue" :text="action" link="message"/>
     </form>
   </div>    
 </template>

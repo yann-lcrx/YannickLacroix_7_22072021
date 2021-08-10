@@ -1,12 +1,13 @@
 <template>
     <div class="message card">
         <div>
-            <h2>{{ title }}</h2>
+            <h1 v-if="singleMessage">{{ title }}</h1>
+            <h2 v-else>{{ title }}</h2>
         </div>
         <p>{{ text }}</p>
         <div class="message__footer">
             <p>{{ author }} | </p>
-            <p>{{ replyNumber }} commentaires | </p>
+            <router-link to="message#commentaires"><p>{{ replyNumber }} commentaires | </p></router-link>
             <router-link to="/homepage"><p v-if="isAuthorized == true">Supprimer</p></router-link>
         </div>
     </div>
@@ -14,22 +15,23 @@
 
 <script>
 export default {
-        name: "Message",
-        props: {
-            isAuthorized: Boolean,
-            title: String,
-            author: String,
-            text: String,
-            replyNumber: Number
-        },
-    }
+    name: "Message",
+    props: {
+        isAuthorized: Boolean,
+        title: String,
+        author: String,
+        text: String,
+        replyNumber: Number,
+        singleMessage: Boolean
+    },
+}
 </script>
 
 <style lang="scss" scoped>
     .message{
         text-align: justify;
         &__footer {
-            color: #898276;
+            color: #5F584C;
             font-size: .9rem;
             display: flex;
             flex-flow: nowrap row;

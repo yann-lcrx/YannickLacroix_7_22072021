@@ -1,18 +1,18 @@
 <template>
     <div class="message-list">
-        <section>
-            <router-link to="/message"><Message isAuthorized v-for="(message, index) in messages" :key="index" :title="message.title" :author="message.author" :text="message.text" :replyNumber="message.replyNumber" /></router-link>
-        </section>
         <aside>
             <div>
                 <div class="card">
                     <h1>Accueil</h1>
                     <p>Bienvenue sur votre page d'accueil.</p>
-                    <Button text="Ecrire un message" type="btn btn--message" link="new"/>
+                    <Button text="Ecrire un message" type="btn btn--blue" link="new"/>
                 </div>
                 <Footer />
             </div>
         </aside>
+        <section>
+            <router-link to="/message"><Message isAuthorized v-for="(message, index) in messages" :key="index" :title="message.title" :author="message.author" :text="message.text" :replyNumber="message.replyNumber" /></router-link>
+        </section>
     </div>
 </template>
 
@@ -43,6 +43,7 @@
 <style lang="scss" scoped>
     .message-list {
         display: flex;
+        flex-flow: row-reverse nowrap
     }
     section {
         flex: 1;

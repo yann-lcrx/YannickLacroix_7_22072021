@@ -1,11 +1,16 @@
 <template>
   <div id="app">
-    <header class="header">
-      <img src="./assets/icon-left-font-monochrome-white.png" alt="logo groupomania" class="header__logo">
-      <div v-if="isConnected()">
-          <p>Profil</p>
-          <p>Se déconnecter</p>
-      </div>
+    <header class="header" v-if="isConnected()">
+      <router-link to="/homepage"><img src="./assets/icon-left-font-monochrome-white.png" alt="logo groupomania" class="header__logo"></router-link>
+      <nav class="header__nav" >
+          <ul>
+            <li><router-link to="/profile">Profil</router-link></li>
+            <li><router-link to="/login">Se déconnecter</router-link></li>
+          </ul>
+      </nav>
+    </header>
+    <header class="header" v-else>
+      <router-link to="/login"><img src="./assets/icon-left-font-monochrome-white.png" alt="logo groupomania" class="header__logo"></router-link>
     </header>
     <div class="container">
       <div id="nav">
@@ -20,7 +25,7 @@
       </div>
       <router-view />
     </div>
-    <Footer />
+    <Footer v-if="messageList() == false"/>
   </div>
 </template>
 
@@ -34,6 +39,9 @@ import Footer from '@/components/Footer';
     },
   methods : {
     isConnected(){
+      return false;
+    },
+    messageList(){
       return false;
     }
   }
@@ -67,11 +75,28 @@ import Footer from '@/components/Footer';
   width: 100%;
   height: 100px;
   display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
   background-color: #080f88;
+  > a {
+    align-self: center;
+  }
   &__logo{
     max-width: 200px;
-    align-self: center;
     margin-left: 12px;
+  }
+  &__nav {
+    align-self: center; 
+    ul{
+      text-indent: 0px;
+      list-style-type: none;
+      color:#fefefe;
+      font-weight: bold;
+      display: flex;
+      li {
+        margin-right: 24px;
+      }
+    }
   }
 }
 
@@ -99,6 +124,14 @@ import Footer from '@/components/Footer';
 a {
   color: unset;
   text-decoration: none;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.3rem;
 }
 
 </style>

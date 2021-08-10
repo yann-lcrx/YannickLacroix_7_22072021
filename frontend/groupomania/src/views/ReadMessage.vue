@@ -1,10 +1,10 @@
 <template>
     <section>
-        <Message isAuthorized :title="title" :author="author" :text="text" :replyNumber="replyNumber"/>
-        <SubmitForm isPostingMessage=false rows=2 action="Répondre"/>
+        <Message singleMessage isAuthorized :title="title" :author="author" :text="text" :replyNumber="replyNumber"/>
+        <SubmitForm isPostingMessage=false rows=2 action="Répondre" placeholder="Qu'en pensez-vous ?"/>
 
         <div class="Replies">
-            <h3>Commentaires</h3>
+            <h2>Commentaires</h2>
             <Reply isAuthorized v-for="(reply, index) in replies" :key="index" :author="reply.author" :text="reply.text"/>
         </div>
 
