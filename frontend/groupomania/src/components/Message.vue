@@ -22,6 +22,7 @@ export default {
         author: String,
         text: String,
         replyNumber: Number,
+        userId: Number,
         singleMessage: Boolean
     },
 }

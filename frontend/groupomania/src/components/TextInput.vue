@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <input :id="id" :placeholder="placeholder" :type="type" :maxlength="maxlength" required>
-    </div>
+    <input @keyup="emitKeyupEvent" :id="id" :placeholder="placeholder" :type="type" :maxlength="maxlength" required>
 </template>
 
 <script>
@@ -17,8 +15,13 @@
             type: {
                 Type: String
             },
-            maxlength: Number
+            maxlength: Number,
         },
+        methods: {
+            emitKeyupEvent(event) {
+                this.$emit('input-keyup', event.target.value)
+            }
+        } 
     }
 </script>
 

@@ -15,6 +15,7 @@
     import SubmitForm from "@/components/SubmitForm";
     import Message from "@/components/Message";
     import Reply from "@/components/Reply";
+    import { mapState } from 'vuex';
 
     export default {
             name: "ReadMessage",
@@ -27,16 +28,17 @@
                     author: 'Yannick',
                     text: 'Entre modernité et tradition, un café vraiment pas piqué des hannetons. Je recommande chaudement.',
                     replyNumber: 3,
-                    replies:[
+                    /*replies:[
                         {author: "Yannick", text: "Passionnant !"},
                         {author: "MrMiam", text: "Quelle heure ?"}
-                    ]
+                    ]*/
                 }
             },
-            methods: {
-                test() {
-                    console.log('Oui, ça marche')
-                }
+            computed: {
+                ...mapState({
+                    messages: "messages",
+                    replies: "replies"
+                })
             }
         }
 </script>

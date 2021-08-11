@@ -6,10 +6,23 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     messages: [
-      {title: "Duck season", author: "Elmer le chasseur fou", replyNumber: 12, text: "Je pars à la chasse aux canards !"},
-      {title: "Critique de Space Jam A New Legacy", author: "Ce Youtubeur bien connu", replyNumber: 56, text: "Il ne vole pas bien haut."},
-      {title: "Pourquoi les montres suisses sont-elles aussi chères ?", author: "Un homme curieux", replyNumber: 2, text: "En plus, elles ne donnent même pas l'heure plus vite."}
-  ]
+      {id: 1, title: "Duck season", author: "Elmer le chasseur fou", replyNumber: 12, text: "Je pars à la chasse aux canards !"},
+      {id: 2, title: "Critique de Space Jam A New Legacy", author: "Ce Youtubeur bien connu", replyNumber: 56, text: "Il ne vole pas bien haut."},
+      {id: 3, title: "Pourquoi les montres suisses sont-elles aussi chères ?", author: "Un homme curieux", replyNumber: 2, text: "En plus, elles ne donnent même pas l'heure plus vite."}
+    ],
+    replies: [
+      {id: 1, author: "François", text:"C'est génial", postId:"1"},
+      {id: 2, author: "Michel", text:"C'est pas mal", postId:"1"},
+      {id: 3, author: "Cerise", text:"C'est franchement pas terrible", postId:"2"}
+    ],
+    users: {
+      name: "Yannick"
+    },
+    loggedInUser: {
+      name: "Yannick",
+      email: "faussebonneemail@gmail.com",
+      role: "Administrateur"
+    }
   },
   mutations: {
      CREATE_POST(state, post) {
@@ -18,13 +31,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    /*createPost(context) {
-      const title = document.getElementById('post-message__title').value;
-      const text = document.getElementById('post-message__text').value;
-      context.commit('CREATE_POST', title, text)
-    }*/
     createPost(context, payload) {
-      console.log(payload);
       context.commit('CREATE_POST', payload)
     }
   }

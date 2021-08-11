@@ -8,7 +8,7 @@
             <form class="card">
                     <TextInput v-for="(field, index) in fieldList" :key="index" :maxlength="field.maxlength" :id="field.id" :placeholder="field.placeholder" :type="field.type"/>
                     <div class="buttons">
-                        <Button :link="link" :type="buttonClass" :text="buttonLabel" />
+                        <Button :link="link" type="Submit" :btnclass="buttonClass" :text="buttonLabel" />
                     </div>  
                     <p>Mot de passe oublié ? Cliquez <a href="google.com">ici</a>.</p>
             </form>

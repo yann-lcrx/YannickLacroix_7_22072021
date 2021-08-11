@@ -2,12 +2,12 @@
     <section class="profile card">
         <h1>Profil</h1>
         <div>
-            <p>Nom d'utilisateur: <span class="profile__info">{{username}}</span></p>
-            <p>Adresse électronique: <span class="profile__info">{{email}}</span></p>
-            <p>Rôle: <span class="profile__info">{{role}}</span></p>
+            <p>Nom d'utilisateur: <span class="profile__info">{{loggedInUser.name}}</span></p>
+            <p>Adresse électronique: <span class="profile__info">{{loggedInUser.email}}</span></p>
+            <p>Rôle: <span class="profile__info">{{loggedInUser.role}}</span></p>
             <div class="profile__buttons">
-                <Button link="/login" type="btn btn--red" text="Supprimer le compte" />
-                <Button link="/homepage" type="btn btn--blue" text="Retour" />
+                <Button link="/login" btnclass="btn btn--red" text="Supprimer le compte" />
+                <Button link="/homepage" btnclass="btn btn--blue" text="Retour" />
             </div>
         </div>
     </section>
@@ -32,6 +32,7 @@
 
 <script>
 import Button from "@/components/Button";
+import { mapState } from "vuex";
 
 export default {
         name: "Profile",
@@ -44,6 +45,11 @@ export default {
                 email: "yannick84v@gmail.com",
                 role: "Administrateur"
             }
-        }
+        },
+        computed: {
+            ...mapState({
+                loggedInUser: "loggedInUser"
+                })
+            }
     }
 </script>

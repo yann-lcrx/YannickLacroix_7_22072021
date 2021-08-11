@@ -5,7 +5,7 @@
                 <div class="card">
                     <h1>Accueil</h1>
                     <p>Bienvenue sur votre page d'accueil.</p>
-                    <Button text="Ecrire un message" type="btn btn--blue" link="new"/>
+                    <Button text="Ecrire un message" btnclass="btn btn--blue" link="new"/>
                 </div>
                 <Footer />
             </div>

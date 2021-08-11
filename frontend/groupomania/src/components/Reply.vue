@@ -12,6 +12,8 @@
 export default {
         name: "Reply",
         props: {
+            id: Number,
+            postId: Number,
             isAuthorized: Boolean,
             author: String,
             text: String

@@ -28,10 +28,6 @@ export default {
             }
         },
         methods: {
-            test() {
-                console.log(document.getElementById('post-message__title').value);
-                
-            },
             ...mapActions(['createPost'])
         }
     }

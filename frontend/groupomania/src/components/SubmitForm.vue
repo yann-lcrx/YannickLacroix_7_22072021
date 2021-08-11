@@ -1,10 +1,10 @@
 <template>
   <div>
     <form @submit.prevent="emitValidationEvent">
-        <TextInput v-if="isPostingMessage == true" :maxlength="maxlength" id="post-message__title" placeholder="Titre" />
-        <textarea :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
+        <TextInput @input-keyup="changeTitle" v-if="isPostingMessage == true" :maxlength="maxlength" id="post-message__title" placeholder="Titre" />
+        <textarea v-model="text" :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
         <Button type="submit" btnclass="btn btn--blue" :text="action" link="message"/>
-    </form>
+    </form> 
   </div>    
 </template>
 
@@ -27,17 +27,22 @@ export default {
     },
     data() {
         return {
-            maxlength: 64
+            maxlength: 64,
+            title: "",
+            text: "",
         }
     },
     methods: {
         emitValidationEvent() {
             this.$emit('form-click', {
-                title: document.getElementById('post-message__title').value,
+                title: this.title,
                 author: "Francis",
                 replyNumber: 9,
-                text: document.getElementById('post-message__text').value
-            })
+                text: this.text
+            });
+        },
+        changeTitle(payload) {
+            this.title = payload;
         }
     }
 }
