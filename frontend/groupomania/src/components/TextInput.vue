@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input :id="id" :placeholder="placeholder" :type="type" :maxlength="maxlength">
+        <input :id="id" :placeholder="placeholder" :type="type" :maxlength="maxlength" required>
     </div>
 </template>
 

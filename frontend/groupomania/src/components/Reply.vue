@@ -1,13 +1,11 @@
 <template>
-    <a href="">
-        <div class="reply card">
-            <div class="reply__info">
-                <p>{{ author }}</p>
-                <router-link to="/message"><p>Supprimer</p></router-link>
-            </div>
-            <p>{{ text }}</p>
+    <div class="reply card">
+        <div class="reply__info">
+            <p>{{ author }}</p>
+            <router-link to="/message"><p>Supprimer</p></router-link>
         </div>
-    </a>    
+        <p>{{ text }}</p>
+    </div>
 </template>
 
 <script>

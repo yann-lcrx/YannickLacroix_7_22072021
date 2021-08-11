@@ -1,9 +1,9 @@
 <template>
   <div>
-    <form>
+    <form @submit.prevent="emitValidationEvent">
         <TextInput v-if="isPostingMessage == true" :maxlength="maxlength" id="post-message__title" placeholder="Titre" />
-        <textarea name="write-message" :rows="rows" :placeholder="placeholder"></textarea>
-        <Button type="btn btn--blue" :text="action" link="message"/>
+        <textarea :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
+        <Button type="submit" btnclass="btn btn--blue" :text="action" link="message"/>
     </form>
   </div>    
 </template>
@@ -21,11 +21,23 @@ export default {
         action: String,
         rows: Number,
         isPostingMessage: Boolean,
-        placeholder: String
+        placeholder: String,
+        id: String,
+        onClick: Function
     },
     data() {
         return {
             maxlength: 64
+        }
+    },
+    methods: {
+        emitValidationEvent() {
+            this.$emit('form-click', {
+                title: document.getElementById('post-message__title').value,
+                author: "Francis",
+                replyNumber: 9,
+                text: document.getElementById('post-message__text').value
+            })
         }
     }
 }

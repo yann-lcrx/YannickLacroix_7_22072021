@@ -1,7 +1,7 @@
 <template>
     <section>
         <Message singleMessage isAuthorized :title="title" :author="author" :text="text" :replyNumber="replyNumber"/>
-        <SubmitForm isPostingMessage=false rows=2 action="Répondre" placeholder="Qu'en pensez-vous ?"/>
+        <SubmitForm isPostingMessage=false rows=2 action="Répondre" placeholder="Qu'en pensez-vous ?" id="post-Message__text"/>
 
         <div class="Replies">
             <h2>Commentaires</h2>
@@ -32,17 +32,16 @@
                         {author: "MrMiam", text: "Quelle heure ?"}
                     ]
                 }
+            },
+            methods: {
+                test() {
+                    console.log('Oui, ça marche')
+                }
             }
         }
 </script>
 
 <style lang="scss" scoped>
-    textarea {
-        border-radius: 8px;
-        border: 1px #cecece solid;
-        width: 100%;
-        margin-bottom: 16px
-    }
     form {
         margin-bottom: 32px
     }

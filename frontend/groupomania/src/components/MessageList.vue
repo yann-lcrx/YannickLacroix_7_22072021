@@ -20,6 +20,7 @@
     import Message from "@/components/Message";
     import Button from "@/components/Button";
     import Footer from "@/components/Footer";
+    import { mapState } from 'vuex'
     
 
     export default {
@@ -30,12 +31,12 @@
         data() {
             return {
                 messageList: true,
-                messages: [
-                    {title: "Duck season", author: "Elmer", replyNumber: "12", text: "Je pars à la chasse aux canards !"},
-                    {title: "Critique de Space Jam 2", author: "Ce Youtubeur bien connu", replyNumber: "56", text: "Il ne vole pas bien haut."},
-                    {title: "Pourquoi les montres suisses sont-elles aussi chères ?", author: "Un homme curieux", replyNumber: "2", text: "En plus, elles ne donnent même pas l'heure plus vite."}
-                ]
             }
+        },
+        computed: {
+            ...mapState({
+                messages: "messages"
+            })
         }
     }
 </script>

@@ -1,6 +1,7 @@
 <template>
     <div class="button">
-        <router-link :to="link"><a :class="type">{{ text }}</a></router-link>
+        <!--<router-link :to="link"><button :class="type">{{ text }}</button></router-link>-->
+        <button :type="type" :class="btnclass">{{ text }}</button>
     </div>
 </template>
 
@@ -10,7 +11,13 @@ export default {
     props: {
         type: String,
         link: String,
+        btnclass: String,
         text: String
+    },
+    methods: {
+        emitButtonEvent() {
+            this.$emit('button-click')
+        }
     }
 }
 </script>
@@ -26,7 +33,7 @@ export default {
         border-radius: 6px;
         box-shadow: 4px 4px 6px 0px rgba(22,22,22,0.7);
         font-weight: bold;
-        display: inline-block;
+        border: 0px;
         position: relative;
         z-index: 1;
         &:hover{

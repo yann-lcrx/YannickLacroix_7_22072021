@@ -2,15 +2,15 @@
     <footer>
       <p>Copyright Groupomania 2021, tous droits réservés.</p>
       <ul>
-        <li><a href="google.com">Mentions légales</a></li>
-        <li><a href="google.com">Nous contacter</a></li>
+        <li><a href="#">Mentions légales</a></li>
+        <li><a href="#">Nous contacter</a></li>
       </ul>
     </footer>
 </template>
 
 <script>
 export default {
-    Name: "Footer",
+    name: "Footer",
     props: {
 
     }

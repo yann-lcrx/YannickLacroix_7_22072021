@@ -1,7 +1,7 @@
 <template>
     <section>
         <h1>Rédiger un message</h1>
-        <SubmitForm :action="action" :rows="rows" :placeholder="placeholder" isPostingMessage/>
+        <SubmitForm :id="post-message__text" :action="action" :rows="rows" :placeholder="placeholder" isPostingMessage @form-click="createPost"/>
     </section>
 </template>
 
@@ -13,6 +13,7 @@
 
 <script>
 import SubmitForm from "@/components/SubmitForm";
+import { mapActions } from 'vuex'
 
 export default {
         name: "NewMessage",
@@ -25,6 +26,13 @@ export default {
                 rows: 10,
                 action: "Publier"
             }
+        },
+        methods: {
+            test() {
+                console.log(document.getElementById('post-message__title').value);
+                
+            },
+            ...mapActions(['createPost'])
         }
     }
 </script>
