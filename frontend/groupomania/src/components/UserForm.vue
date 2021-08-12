@@ -5,10 +5,10 @@
             <div>
                 <img src="../assets/icon.png" alt="icône Groupomania">
             </div>
-            <form class="card">
-                    <TextInput v-for="(field, index) in fieldList" :key="index" :maxlength="field.maxlength" :id="field.id" :placeholder="field.placeholder" :type="field.type"/>
+            <form @submit="emitSubmitEvent" class="card">
+                    <TextInput @input-keyup="emitKeyupEvent" v-for="(field, index) in fieldList" :fieldList="fieldList" :key="index" :maxlength="field.maxlength" :id="field.id" :placeholder="field.placeholder" :type="field.type"/>
                     <div class="buttons">
-                        <Button :link="link" type="Submit" :btnclass="buttonClass" :text="buttonLabel" />
+                        <Button :link="link" type="submit" :btnclass="buttonClass" :text="buttonLabel" />
                     </div>  
                     <p>Mot de passe oublié ? Cliquez <a href="google.com">ici</a>.</p>
             </form>
@@ -25,21 +25,20 @@
         components: {
             TextInput, Button
         },
-        data() {
-            return {
-                fieldList: [
-                    {id: "username", placeholder: "nom d'utilisateur", maxlength: 32},
-                    {id: "password", placeholder: "mot de passe", maxlength: 32},
-                    {id: "email", type: "email", placeholder: "adresse électronique"}
-                ],
+        methods: {
+            emitSubmitEvent() {
+                this.$emit('form-submit')
+            },
+            emitKeyupEvent(payload) {
+                this.$emit('input-keyup', payload)
             }
         },
         props: {
             formType: String,
             buttonLabel: String,
             buttonClass: String,
-            link: String    
-            //fieldList: Array
+            link: String,  
+            fieldList: Array
         }
 };
 </script>
@@ -66,14 +65,6 @@
     img {
         max-width: 380px;
         mix-blend-mode: darken;
-    }
-    input {
-        margin-bottom: 12px;
-        width: 100%;
-        font-size: 1.3rem;
-        padding: 6px;
-        border-radius: 8px;
-        border: 1px gray solid;
     }
 
     .buttons {

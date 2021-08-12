@@ -28,11 +28,14 @@ export default new Vuex.Store({
      CREATE_POST(state, post) {
       state.messages.push(post);
       console.log("Réussi")
-    }
+    },
   },
   actions: {
     createPost(context, payload) {
       context.commit('CREATE_POST', payload)
+    },
+    loginUser(context, payload) {
+      context.commit('LOGIN_USER', payload)
     }
   }
 })

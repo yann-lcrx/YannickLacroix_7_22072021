@@ -1,8 +1,6 @@
 <template>
     <div>
-        <UserForm link="/homepage" fieldList="[{id: 'username', placeholder: 'nom d'utilisateur'},
-                    {id: 'password', placeholder: 'mot de passe'},
-                    {id: 'email', type: 'email', placeholder: 'adresse électronique'}]" formType="login" buttonLabel="Se connecter" buttonClass="btn btn--blue"/>    
+        <UserForm link="/homepage" formType="login" :fieldList="fieldList" :buttonLabel="btnLabel" :buttonClass="btnClass"/>    
     </div>
 </template>
 
@@ -14,5 +12,15 @@
         components: {
             UserForm
         },
+        data() {
+            return {
+                fieldList: [
+                    {id: "username", placeholder: "Nom d'utilisateur", maxlength: 32},
+                    {id: "password", type: "password", placeholder: "Mot de passe", maxlength: 32}
+                ],
+                btnLabel: "Se connecter",
+                btnClass: "btn btn--blue"
+            }
+        }
 };
 </script>

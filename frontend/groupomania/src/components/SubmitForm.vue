@@ -4,8 +4,8 @@
         <TextInput @input-keyup="changeTitle" v-if="isPostingMessage == true" :maxlength="maxlength" id="post-message__title" placeholder="Titre" />
         <textarea v-model="text" :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
         <Button type="submit" btnclass="btn btn--blue" :text="action" link="message"/>
-    </form> 
-  </div>    
+    </form>
+  </div>
 </template>
 
 <script>

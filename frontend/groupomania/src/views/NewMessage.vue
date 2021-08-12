@@ -12,10 +12,10 @@
 </style>
 
 <script>
-import SubmitForm from "@/components/SubmitForm";
-import { mapActions } from 'vuex'
+    import SubmitForm from "@/components/SubmitForm";
+    import { mapActions } from 'vuex'
 
-export default {
+    export default {
         name: "NewMessage",
         components: {
             SubmitForm
