@@ -1,7 +1,7 @@
 <template>
     <section>
         <Message singleMessage isAuthorized :title="title" :author="author" :text="text" :replyNumber="replyNumber"/>
-        <SubmitForm isPostingMessage=false rows=2 action="Répondre" placeholder="Qu'en pensez-vous ?" id="post-Message__text"/>
+        <SubmitForm @form-click="createReply" isPostingMessage=false rows=2 action="Répondre" placeholder="Qu'en pensez-vous ?" id="post-Message__text"/>
 
         <div class="Replies">
             <h2>Commentaires</h2>
@@ -28,10 +28,6 @@
                     author: 'Yannick',
                     text: 'Entre modernité et tradition, un café vraiment pas piqué des hannetons. Je recommande chaudement.',
                     replyNumber: 3,
-                    /*replies:[
-                        {author: "Yannick", text: "Passionnant !"},
-                        {author: "MrMiam", text: "Quelle heure ?"}
-                    ]*/
                 }
             },
             computed: {

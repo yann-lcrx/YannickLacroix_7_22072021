@@ -11,7 +11,7 @@
             </div>
         </aside>
         <section>
-            <router-link to="/message"><Message isAuthorized v-for="(message, index) in messages" :key="index" :title="message.title" :author="message.author" :text="message.text" :replyNumber="message.replyNumber" /></router-link>
+            <router-link to="/message"><Message isAuthorized v-for="(message, index) in messages" :key="index" :title="message.title" :author="message.author" :content="message.content" :replyNumber="message.replyNumber" /></router-link>
         </section>
     </div>
 </template>

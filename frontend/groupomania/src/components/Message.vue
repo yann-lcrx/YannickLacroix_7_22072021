@@ -4,7 +4,7 @@
             <h1 v-if="singleMessage">{{ title }}</h1>
             <h2 v-else>{{ title }}</h2>
         </div>
-        <p>{{ text }}</p>
+        <p>{{ content }}</p>
         <div class="message__footer">
             <p>{{ author }} | </p>
             <router-link to="message#commentaires"><p>{{ replyNumber }} commentaires | </p></router-link>
@@ -20,7 +20,7 @@ export default {
         isAuthorized: Boolean,
         title: String,
         author: String,
-        text: String,
+        content: String,
         replyNumber: Number,
         userId: Number,
         singleMessage: Boolean

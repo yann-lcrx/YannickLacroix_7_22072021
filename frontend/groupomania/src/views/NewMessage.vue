@@ -1,7 +1,7 @@
 <template>
     <section>
         <h1>Rédiger un message</h1>
-        <SubmitForm :id="post-message__text" :action="action" :rows="rows" :placeholder="placeholder" isPostingMessage @form-click="createPost"/>
+        <SubmitForm id="post-message__text" :action="action" :rows="rows" :placeholder="placeholder" isPostingMessage @form-click="createPost"/>
     </section>
 </template>
 

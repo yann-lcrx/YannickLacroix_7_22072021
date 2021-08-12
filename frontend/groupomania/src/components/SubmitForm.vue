@@ -10,6 +10,7 @@
 
 <script>
 import Button from "@/components/Button";
+import { mapState } from "vuex"
 
 export default {
     name: "SubmitForm",
@@ -33,13 +34,25 @@ export default {
     },
     methods: {
         emitValidationEvent() {
+            if (this.title != null) {
             this.$emit('form-click', {
                 title: this.title,
-                author: "Francis",
-                replyNumber: 9,
-                text: this.text
-            });
+                id_user: this.loggedInUser.id,
+                content: this.text
+                })
+            } else {
+                this.$emit('form-click', {
+                    id_post: 120,
+                    id_user: this.loggedInUser.id,
+                    content: this.text
+                })
+            }
         },
+    },
+    computed: {
+        ...mapState({
+            loggedInUser: 'loggedInUser'
+        })
     }
 }
 </script>
