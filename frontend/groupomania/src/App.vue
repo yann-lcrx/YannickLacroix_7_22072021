@@ -102,4 +102,15 @@ h2 {
   font-size: 1.3rem;
 }
 
+input {
+    margin-bottom: 12px;
+    width: 100%;
+    font-size: 1.3rem;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 8px;
+    border: 1px #cecece solid;
+    text-indent: 8px;
+}
+
 </style>

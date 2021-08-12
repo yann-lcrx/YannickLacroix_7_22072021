@@ -5,8 +5,10 @@
             <div>
                 <img src="../assets/icon.png" alt="icône Groupomania">
             </div>
-            <form @submit="emitSubmitEvent" class="card">
-                    <TextInput @input-keyup="emitKeyupEvent" v-for="(field, index) in fieldList" :fieldList="fieldList" :key="index" :maxlength="field.maxlength" :id="field.id" :placeholder="field.placeholder" :type="field.type"/>
+            <form @submit.prevent="emitSubmitEvent" class="card">
+                    <input v-model="username" id="username" maxlength="32" placeholder="Nom d'utilisateur" required />
+                    <input v-model="password" id="password" maxlength="32" placeholder="Mot de passe" type="password" required />
+                    <input v-model="email" v-if="isSignup == true" id="email" placeholder="Adresse électronique" type="email" required />
                     <div class="buttons">
                         <Button :link="link" type="submit" :btnclass="buttonClass" :text="buttonLabel" />
                     </div>  
@@ -17,28 +19,35 @@
 </template>
 
 <script>
-    import TextInput from "./TextInput.vue";
     import Button from "./Button.vue";
 
     export default {
         name: "UserForm",
         components: {
-            TextInput, Button
+            Button
         },
         methods: {
             emitSubmitEvent() {
-                this.$emit('form-submit')
+                this.$emit('form-submit', {
+                    name: this.username,
+                    password: this.password,
+                    email: this.email
+                })
             },
-            emitKeyupEvent(payload) {
-                this.$emit('input-keyup', payload)
-            }
         },
         props: {
             formType: String,
             buttonLabel: String,
             buttonClass: String,
-            link: String,  
-            fieldList: Array
+            link: String,
+            isSignup: Boolean
+        },
+        data() {
+            return {
+                username: "",
+                password: "",
+                email: ""
+            }
         }
 };
 </script>

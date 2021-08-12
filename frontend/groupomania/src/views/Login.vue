@@ -1,6 +1,6 @@
 <template>
     <div>
-        <UserForm link="/homepage" formType="login" :fieldList="fieldList" :buttonLabel="btnLabel" :buttonClass="btnClass"/>    
+        <UserForm link="/homepage" formType="login" :buttonLabel="btnLabel" :buttonClass="btnClass"/>    
     </div>
 </template>
 
@@ -22,5 +22,5 @@
                 btnClass: "btn btn--blue"
             }
         }
-};
+    };
 </script>

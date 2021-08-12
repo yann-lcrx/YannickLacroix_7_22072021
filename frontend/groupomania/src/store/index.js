@@ -15,9 +15,11 @@ export default new Vuex.Store({
       {id: 2, author: "Michel", text:"C'est pas mal", postId:"1"},
       {id: 3, author: "Cerise", text:"C'est franchement pas terrible", postId:"2"}
     ],
-    users: {
-      name: "Yannick"
-    },
+    users: [
+      {id: 1, name: "François", password:"AaZZ8520", email:"francoisvaillant@gmail.com"},
+      {id: 2, name: "Michel", password:"AaZZ8520", email:"michelvaillant@gmail.com"},
+      {id: 3, name: "Sarah", password:"AaZZ8520", email:"sarahvaillant@gmail.com"},
+    ],
     loggedInUser: {
       name: "Yannick",
       email: "faussebonneemail@gmail.com",
@@ -29,13 +31,35 @@ export default new Vuex.Store({
       state.messages.push(post);
       console.log("Réussi")
     },
+    CREATE_USER(state, user) {
+      state.users.push(user);
+      console.log(state.users)
+    }
   },
   actions: {
     createPost(context, payload) {
       context.commit('CREATE_POST', payload)
     },
-    loginUser(context, payload) {
-      context.commit('LOGIN_USER', payload)
+    async signupUser(context, payload) {
+      await fetch('http://localhost:3000/api/auth/signup', {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(function(res) {
+        if (res.ok) {
+          return res.json
+        }
+      })
+      .then(function() {
+        context.commit('CREATE_USER', payload)
+      })
+      .catch(function(err) {
+        console.error(err)
+      })
     }
   }
 })

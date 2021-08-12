@@ -1,7 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="emitValidationEvent">
-        <TextInput @input-keyup="changeTitle" v-if="isPostingMessage == true" :maxlength="maxlength" id="post-message__title" placeholder="Titre" />
+        <input v-model="title" v-if="isPostingMessage == true" :maxlength="maxlength" id="post-message__title" placeholder="Titre" />
         <textarea v-model="text" :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
         <Button type="submit" btnclass="btn btn--blue" :text="action" link="message"/>
     </form>
@@ -9,13 +9,12 @@
 </template>
 
 <script>
-import TextInput from "@/components/TextInput";
 import Button from "@/components/Button";
 
 export default {
     name: "SubmitForm",
     components: {
-        Button, TextInput
+        Button
     },
     props: {
         action: String,
@@ -41,9 +40,6 @@ export default {
                 text: this.text
             });
         },
-        changeTitle(payload) {
-            this.title = payload;
-        }
     }
 }
 </script>
