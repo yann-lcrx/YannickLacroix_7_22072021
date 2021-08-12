@@ -34,10 +34,15 @@ export default new Vuex.Store({
     CREATE_USER(state, user) {
       state.users.push(user);
       console.log(state.users)
+    },
+    LOGIN_USER(state, user) {
+      state.loggedInUser.name = user.name,
+      state.loggedInUser.email = user.email,
+      state.loggedInUser.role = user.role
     }
   },
   actions: {
-    createPost(context, payload) {
+    async createPost(context, payload) {
       context.commit('CREATE_POST', payload)
     },
     async signupUser(context, payload) {
@@ -56,6 +61,28 @@ export default new Vuex.Store({
       })
       .then(function() {
         context.commit('CREATE_USER', payload)
+      })
+      .catch(function(err) {
+        console.error(err)
+      })
+    },
+    async loginUser(context, payload) {
+      console.log(payload);
+      await fetch('http://localhost:3000/api/auth/login', {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+        })
+      .then(function(res) {
+        if (res.ok) {
+          return res.json
+        }
+      })
+      .then(function() {
+        context.commit('LOGIN_USER', payload)
       })
       .catch(function(err) {
         console.error(err)
