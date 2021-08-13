@@ -1,9 +1,21 @@
 const Post = require('../models/postModel.js');
 
-exports.getAllPostsCtrl = (req, res, next) => {
-    Post.getAllPosts(req.params.id, req.params.quantity)
-        .then(posts => res.status(200).json(posts))
-        .catch(error => res.status(400).json({ error }))
+exports.getAllPostsCtrl = async (req, res, next) => {
+    try {
+        const posts = await Post.getAllPosts(req.params.id, req.params.quantity);
+        if (!posts) {
+            throw({status:400, msg:"Erreur de récupération des messages"})
+        };
+        for (let post of posts) {
+            const author = JSON.stringify(await Post.getMatchingUser(post.id_user));
+            const length = author.length;
+            post.author = author.substr(12, (length - 15))
+        }
+        res.status(200).json({posts});
+        }
+    catch(err) {
+        res.status(err.status).json({ error: err.msg })
+    }
 }
 
 exports.getOnePostCtrl = (req, res, next) => {
