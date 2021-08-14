@@ -4,7 +4,7 @@
       <nav class="header__nav" >
           <ul>
             <li><router-link to="/profile">Profil</router-link></li>
-            <li><router-link to="/login">Se déconnecter</router-link></li>
+            <li @click="emitLogoutEvent"><router-link to="/login">Se déconnecter</router-link></li>
           </ul>
       </nav>
     </header>
@@ -18,6 +18,12 @@ export default {
     name: "Header",
     props: {
         isConnected: Boolean
+    },
+    methods: {
+      emitLogoutEvent() {
+        console.log('cliqué');
+        this.$emit('logout-click')
+      }
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header :isConnected="isConnected" />
+    <Header @logout-click="logout" :isConnected="isConnected" />
     <div class="container">
       <div id="nav">
         <router-link to="/">Vue Home</router-link> |
@@ -21,7 +21,7 @@
 <script>
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import '@/scss/variables.scss'
+import { mapActions } from 'vuex';
 
   export default {
     name:"App",
@@ -32,9 +32,7 @@ import '@/scss/variables.scss'
     messageList(){
       return false;
     },
-    test(){
-      console.log("Réussi")
-    }
+    ...mapActions(['logout'])
   },
   data() {
     return {

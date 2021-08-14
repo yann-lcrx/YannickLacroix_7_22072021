@@ -58,11 +58,11 @@ export default new Vuex.Store({
       state.loggedInUser.id = user.id_user
     },
 
-    DELETE_USER() {
+    LOGOUT() {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
       localStorage.removeItem('name');
-      console.log('supprimé')
+      console.log('déconnecté')
     }
   },
   getters: {
@@ -141,11 +141,7 @@ export default new Vuex.Store({
         headers: this.getters.formattedHeaders,
         body: JSON.stringify(payload)
       })
-      .then(function(res) {
-        if (res.ok) {
-          return res.json
-        }
-      })
+      .then(res => res.json)
       .catch(function(err) {
         console.error(err)
       })
@@ -184,7 +180,8 @@ export default new Vuex.Store({
       })
         .then(res => res.json())
         .then(user => {
-          localStorage.setItem('name', payload.name)
+          localStorage.setItem('name', payload.name);
+          this.state.loggedInUser.name = payload.name;
           context.commit('LOGIN_USER', user);
         })
         .catch(function(err) {
@@ -200,11 +197,15 @@ export default new Vuex.Store({
       })
         .then(res => res.json())
         .then(function() {
-          context.commit('DELETE_USER')
+          context.commit('LOGOUT')
         })
         .catch(function(err) {
           console.error(err)
         })
-      }
+    },
+
+    async logout(context) {
+      context.commit('LOGOUT')
+    }
   }
 })
