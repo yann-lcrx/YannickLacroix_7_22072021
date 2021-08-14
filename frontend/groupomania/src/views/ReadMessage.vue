@@ -26,7 +26,7 @@
                 return {
                     title: 'Extra Life Café, dernier bastion de l\'arcade à Paris',
                     author: 'Yannick',
-                    text: 'Entre modernité et tradition, un café vraiment pas piqué des hannetons. Je recommande chaudement.',
+                    content: 'Entre modernité et tradition, un café vraiment pas piqué des hannetons. Je recommande chaudement.',
                     replyNumber: 3,
                 }
             },

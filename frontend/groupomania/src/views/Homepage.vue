@@ -9,18 +9,18 @@
 
 <script>
     import MessageList from "@/components/MessageList";
-    import { mapActions } from "vuex"
+    //import { mapActions } from "vuex"
 
     export default {
         name: "Homepage",
         components: {
             MessageList
         },
-        beforeMount() {
-            this.getSeveralPosts
+        /*beforeMount() {
+            this.getSeveralPosts()
         },
         methods: {
             ...mapActions(['getSeveralPosts'])
-        }
+        }*/
     }
 </script>

@@ -48,3 +48,11 @@ module.exports.deleteReply = async function(id, id_user) {
     }
     await database.getData("DELETE FROM reply WHERE id = ? AND id_user = ?", [id, id_user])
 }
+
+module.exports.getMatchingUser = async function (id_user) {
+    let response = await database.getData("SELECT name AS author FROM user WHERE id = ?", [id_user]);
+    if (!response) {
+        throw ({ status: 400, msg:"Souci dans la requête de user"})
+    }
+    return response;
+}

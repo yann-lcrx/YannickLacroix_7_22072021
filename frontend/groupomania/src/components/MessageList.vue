@@ -20,7 +20,7 @@
     import Message from "@/components/Message";
     import Button from "@/components/Button";
     import Footer from "@/components/Footer";
-    import { mapState } from 'vuex'
+    import { mapState, mapActions } from 'vuex'
     
 
     export default {
@@ -32,6 +32,12 @@
             return {
                 messageList: true,
             }
+        },
+        beforeMount() {
+            this.getSeveralPosts()
+        },
+        methods: {
+            ...mapActions(['getSeveralPosts'])
         },
         computed: {
             ...mapState({
