@@ -134,7 +134,7 @@ export default new Vuex.Store({
         })
     },
 
-    async createReply(payload) {
+    async createReply(context, payload) {
       console.log(payload);
       await fetch('http://localhost:3000/api/replies', {
         method: "POST",

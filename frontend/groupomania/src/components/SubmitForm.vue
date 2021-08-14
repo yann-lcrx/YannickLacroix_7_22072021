@@ -1,7 +1,11 @@
 <template>
   <div>
-    <form @submit.prevent="emitValidationEvent">
-        <input v-model="title" v-if="isPostingMessage == true" :maxlength="maxlength" id="post-message__title" placeholder="Titre" />
+    <form v-if="isPostingMessage == true" @submit.prevent="emitPostEvent">
+        <input v-model="title"  :maxlength="maxlength" id="post-message__title" placeholder="Titre" />
+        <textarea v-model="text" :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
+        <Button type="submit" btnclass="btn btn--blue" :text="action" link="message"/>
+    </form>
+    <form v-else @submit.prevent="emitReplyEvent">
         <textarea v-model="text" :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
         <Button type="submit" btnclass="btn btn--blue" :text="action" link="message"/>
     </form>
@@ -30,24 +34,24 @@ export default {
             maxlength: 64,
             title: "",
             text: "",
+            postId: (new URL(window.location.href).searchParams.toString()).slice(3)
         }
     },
     methods: {
-        emitValidationEvent() {
-            if (this.title != "") {
+        emitPostEvent() {
             this.$emit('form-click', {
                 title: this.title,
                 id_user: this.loggedInUser.id,
                 content: this.text
-                })
-            } else {
-                this.$emit('reply-click', {
-                    id_user: this.loggedInUser.id,
-                    id_post: 120,
-                    content: this.text
-                })
-            }
+            })
         },
+        emitReplyEvent() {
+            this.$emit('reply-click', {
+                id_user: this.loggedInUser.id,
+                id_post: this.postId,
+                content: this.text
+            })
+        }
     },
     computed: {
         ...mapState({
