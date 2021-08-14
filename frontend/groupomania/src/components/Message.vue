@@ -1,5 +1,5 @@
 <template>
-    <div class="message card">
+    <router-link :to="link"> <div class="message card">
         <div>
             <h1 v-if="singleMessage">{{ title }}</h1>
             <h2 v-else>{{ title }}</h2>
@@ -7,10 +7,10 @@
         <p>{{ content }}</p>
         <div class="message__footer">
             <p>{{ author }} | </p>
-            <router-link to="message#commentaires"><p>{{ replyNumber }} commentaires | </p></router-link>
-            <router-link to="/homepage"><p v-if="isAuthorized == true">Supprimer</p></router-link>
+            <router-link to="message#commentaires"><p v-if="singleMessage">{{ replyNumber }} commentaires | </p></router-link>
+            <router-link to="/homepage"><p v-if="isAuthorized == true && singleMessage == true">Supprimer</p></router-link>
         </div>
-    </div>
+    </div></router-link>
 </template>
 
 <script>
@@ -23,7 +23,8 @@ export default {
         content: String,
         replyNumber: Number,
         userId: Number,
-        singleMessage: Boolean
+        singleMessage: Boolean,
+        link: String
     },
 }
 </script>

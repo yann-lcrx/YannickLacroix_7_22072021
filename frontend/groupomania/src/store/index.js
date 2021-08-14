@@ -15,8 +15,8 @@ export default new Vuex.Store({
       name: "Yannick",
       email: "faussebonneemail@gmail.com",
       role: "Administrateur",
-      id: 71,
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo3MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2Mjg5MzE2MjQsImV4cCI6MTYyOTAxODAyNH0.StRd_7Z8BAjn-Un2Rsk3cJtAyTQvLYQ4RlUTfcbHJac'
+      id: localStorage.getItem('userId'),
+      token: localStorage.getItem('token')
     } 
   },
   mutations: {
@@ -24,24 +24,30 @@ export default new Vuex.Store({
       state.messages = [];
       for (let post of posts) {
         state.messages.push(post);
-        console.log(post)
       }
     },
+
+    GET_ONE_POST(state, post) {
+      state.messages = [];
+      state.messages.push(post)
+    },
+
      CREATE_POST(state, post) {
       state.messages.push(post);
-      console.log("Réussi")
     },
+
     CREATE_REPLY(state, reply) {
       state.replies.push(reply);
     },
+
     CREATE_USER(state, user) {
       state.users.push(user);
-      console.log(state.users)
+      //TODO déterminer que faire de cette fonction
     },
+
     LOGIN_USER(state, user) {
-      state.loggedInUser.name = user.name,
-      state.loggedInUser.email = user.email,
-      state.loggedInUser.role = user.role
+      localStorage.setItem('token', user.token);
+      localStorage.setItem('userId', user.id_user)
     }
   },
   getters: {
@@ -60,6 +66,20 @@ export default new Vuex.Store({
         .then(res => res.json())
         .then(posts => {
           context.commit('GET_SEVERAL_POSTS', posts.posts)
+        })
+        .catch(function(err) {
+          console.error(err)
+        })
+    },
+
+    async getOnePost(context) {
+      let postId = (new URL(window.location.href).searchParams.toString()).slice(3);
+      await fetch('http://localhost:3000/api/posts/' + postId, {
+        headers: { "authorization" : "bearer "+ this.state.loggedInUser.token }
+        })
+        .then(res => res.json())
+        .then(post => {
+          context.commit('GET_ONE_POST', post.post)
         })
         .catch(function(err) {
           console.error(err)
@@ -108,25 +128,22 @@ export default new Vuex.Store({
     },
     
     async loginUser(context, payload) {
-      console.log(payload);
-      try {
-        const data = await fetch('http://localhost:3000/api/auth/login', {
+      await fetch('http://localhost:3000/api/auth/login', {
           method: "POST",
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(payload)
-        });
-        if (!data.ok) throw (data);
-        context.commit('LOGIN_USER', payload);
-        return await data.json();
-      }
-      catch (err) {
-        console.error(err);
-        //TODO : afficher un message d'erreur
-      }
-    },
+        })
+        .then(res => res.json())
+        .then(user => {
+          context.commit('LOGIN_USER', user);
+        })
+        .catch(function(err) {
+          console.error(err)
+        })
+      },
 
     async createReply(context, payload) {
       await fetch('http://localhost:3000/api/replies', {

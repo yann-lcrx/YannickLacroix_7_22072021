@@ -18,10 +18,20 @@ exports.getAllPostsCtrl = async (req, res, next) => {
     }
 }
 
-exports.getOnePostCtrl = (req, res, next) => {
-    Post.getOnePost(req.params.id)
-        .then(post => res.status(200).json(post))
-        .catch(error => res.status(404).json({ error }))
+exports.getOnePostCtrl = async (req, res, next) => {
+    try {
+        const post = await Post.getOnePost(req.params.id);
+        if (!post) {
+            throw({status:400, msg:"Erreur de récupération des messages"})
+        };
+        const author = JSON.stringify(await Post.getMatchingUser(post.id_user));
+        const length = author.length;
+        post.author = author.substr(12, (length - 15));
+        res.status(200).json({post});
+    }
+    catch(err) {
+        res.status(err.status).json({ error: err.msg })
+    }
 }
 
 exports.createPostCtrl = (req, res, next) => {

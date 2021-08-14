@@ -22,11 +22,11 @@ module.exports.getAllPosts = async function(id, limit){
 }
 
 module.exports.getMatchingUser = async function (id_user) {
-        let response = await database.getData("SELECT name AS author FROM user WHERE id = ?", [id_user]);
-        if (!response) {
-            throw ({ status: 400, msg:"Souci dans la requête de user"})
-        }
-        return response;
+    let response = await database.getData("SELECT name AS author FROM user WHERE id = ?", [id_user]);
+    if (!response) {
+        throw ({ status: 400, msg:"Souci dans la requête de user"})
+    }
+    return response;
 }
 
 /**

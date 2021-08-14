@@ -11,7 +11,7 @@
             </div>
         </aside>
         <section>
-            <router-link to="/message"><Message isAuthorized v-for="(message, index) in messages" :key="index" :title="message.title" :author="message.author" :content="message.content" :replyNumber="message.replyNumber" /></router-link>
+            <Message isAuthorized v-for="(message, index) in messages" :key="index" :title="message.title" :author="message.author" :content="message.content" :link="getCustomUrl"/>
         </section>
     </div>
 </template>
@@ -42,7 +42,11 @@
         computed: {
             ...mapState({
                 messages: "messages"
-            })
+            }),
+            getCustomUrl() {
+                console.log("fonction lue");
+                return "message?"
+            }
         }
     }
 </script>
