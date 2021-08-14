@@ -11,7 +11,7 @@
             </div>
         </aside>
         <section>
-            <Message isAuthorized v-for="(message, index) in messages" :key="index" :title="message.title" :author="message.author" :content="message.content" :link="getCustomUrl"/>
+            <Message isAuthorized v-for="(message, index) in messages" :key="index" :title="message.title" :author="message.author" :content="message.content" :link="'/message?id=' + message.id" />
         </section>
     </div>
 </template>
@@ -31,22 +31,26 @@
         data() {
             return {
                 messageList: true,
+                messageId: this.message.id,
+                baseLink: "/homepage?id="
             }
         },
         beforeMount() {
             this.getSeveralPosts()
         },
         methods: {
-            ...mapActions(['getSeveralPosts'])
+            ...mapActions(['getSeveralPosts']),
+            getFormattedLink() {
+                console.log(this.data.baseLink);
+                console.log(this.data.messageId);
+                console.log(this.data.baseLink + this.data.messageId);
+                return this.data.baseLink + this.data.messageId;
+            }
         },
         computed: {
             ...mapState({
                 messages: "messages"
-            }),
-            getCustomUrl() {
-                console.log("fonction lue");
-                return "message?"
-            }
+            })
         }
     }
 </script>
