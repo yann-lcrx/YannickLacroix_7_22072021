@@ -17,7 +17,7 @@ const database = require("./database");
  * @return  {postResponse}         
  */
 module.exports.getAllPosts = async function(id, limit){
-    const answer = await database.getData("SELECT * FROM post WHERE id >= ? LIMIT ?", [id, parseFloat(limit)]);
+    const answer = await database.getData("SELECT * FROM post WHERE id >= ? ORDER BY id DESC LIMIT ?", [id, parseFloat(limit)]);
     return answer;
 }
 

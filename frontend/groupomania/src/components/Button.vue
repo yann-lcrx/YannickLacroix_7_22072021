@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
     name: "Button",
     props: {
@@ -14,10 +16,10 @@ export default {
         btnclass: String,
         text: String
     },
-    methods: {
-        emitButtonEvent() {
-            this.$emit('button-click')
-        }
+    computed: {
+        ...mapState({
+            loggedInUser: 'loggedInUser'
+        })
     }
 }
 </script>

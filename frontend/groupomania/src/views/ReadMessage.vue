@@ -1,7 +1,7 @@
 <template>
     <section>
         <Message singleMessage isAuthorized v-for="(message, index) in messages" :key="index" :title="message.title" :author="message.author" :content="message.content" link="/message"/>
-        <SubmitForm @form-click="createReply" isPostingMessage=false rows=2 action="Répondre" placeholder="Qu'en pensez-vous ?" id="post-Message__text"/>
+        <SubmitForm @reply-click="createReply" isPostingMessage=false rows=2 action="Répondre" placeholder="Qu'en pensez-vous ?" id="post-Message__text"/>
 
         <div class="Replies">
             <h2>{{replyCount}} commentaires</h2>
@@ -33,7 +33,7 @@
             this.getOnePost(), this.getReplies()
         },
         methods: {
-            ...mapActions(['getOnePost','getReplies'])
+            ...mapActions(['getOnePost','getReplies', 'createReply'])
         },
     }
 </script>

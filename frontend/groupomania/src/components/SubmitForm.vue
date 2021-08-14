@@ -34,16 +34,16 @@ export default {
     },
     methods: {
         emitValidationEvent() {
-            if (this.title != null) {
+            if (this.title != "") {
             this.$emit('form-click', {
                 title: this.title,
                 id_user: this.loggedInUser.id,
                 content: this.text
                 })
             } else {
-                this.$emit('form-click', {
-                    id_post: 120,
+                this.$emit('reply-click', {
                     id_user: this.loggedInUser.id,
+                    id_post: 120,
                     content: this.text
                 })
             }

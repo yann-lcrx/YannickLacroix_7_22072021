@@ -9,10 +9,8 @@ export default new Vuex.Store({
     replies: [],
     replyCount: 0,
     loggedInUser: {
-      name: "Yannick",
-      email: "faussebonneemail@gmail.com",
-      role: "Administrateur",
-      id: localStorage.getItem('userId'),
+      name: localStorage.getItem('name'),
+      id: parseFloat(localStorage.getItem('userId')),
       token: localStorage.getItem('token')
     } 
   },
@@ -55,7 +53,16 @@ export default new Vuex.Store({
 
     LOGIN_USER(state, user) {
       localStorage.setItem('token', user.token);
-      localStorage.setItem('userId', user.id_user)
+      state.loggedInUser.token = user.token;
+      localStorage.setItem('userId', user.id_user);
+      state.loggedInUser.id = user.id_user
+    },
+
+    DELETE_USER() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('name');
+      console.log('supprimé')
     }
   },
   getters: {
@@ -120,12 +127,28 @@ export default new Vuex.Store({
         })
         .then(res => res.json())
         .then(replies => {
-          console.log(replies);
           context.commit('GET_REPLIES', replies.replies)
         })
         .catch(function(err) {
           console.error(err)
         })
+    },
+
+    async createReply(payload) {
+      console.log(payload);
+      await fetch('http://localhost:3000/api/replies', {
+        method: "POST",
+        headers: this.getters.formattedHeaders,
+        body: JSON.stringify(payload)
+      })
+      .then(function(res) {
+        if (res.ok) {
+          return res.json
+        }
+      })
+      .catch(function(err) {
+        console.error(err)
+      })
     },
 
     async signupUser(context, payload) {
@@ -158,33 +181,30 @@ export default new Vuex.Store({
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(payload)
-        })
+      })
         .then(res => res.json())
         .then(user => {
+          localStorage.setItem('name', payload.name)
           context.commit('LOGIN_USER', user);
         })
         .catch(function(err) {
           console.error(err)
         })
-      },
+    },
 
-    async createReply(context, payload) {
-      await fetch('http://localhost:3000/api/replies', {
-        method: "POST",
+    async deleteUser(context, payload) {
+      await fetch('http://localhost:3000/api/auth/', {
+        method: "DELETE",
         headers: this.getters.formattedHeaders,
         body: JSON.stringify(payload)
       })
-      .then(function(res) {
-        if (res.ok) {
-          return res.json
-        }
-      })
-      .then(function() {
-        context.commit('CREATE_REPLY', payload)
-      })
-      .catch(function(err) {
-        console.error(err)
-      })
-    },
+        .then(res => res.json())
+        .then(function() {
+          context.commit('DELETE_USER')
+        })
+        .catch(function(err) {
+          console.error(err)
+        })
+      }
   }
 })
