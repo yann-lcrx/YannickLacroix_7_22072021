@@ -4,7 +4,7 @@
             <p>{{ author }}</p>
             <router-link to="/message"><p>Supprimer</p></router-link>
         </div>
-        <p>{{ text }}</p>
+        <p>{{ content }}</p>
     </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
             postId: Number,
             isAuthorized: Boolean,
             author: String,
-            text: String
+            content: String
         },
     }
 </script>
@@ -24,6 +24,11 @@ export default {
 <style lang="scss" scoped>
     .reply{
         text-align: justify;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        > p {
+            margin-top: 2px;
+        }
         &__info {
             display: flex;
             flex-flow: nowrap row;

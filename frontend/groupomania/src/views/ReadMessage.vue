@@ -4,8 +4,8 @@
         <SubmitForm @form-click="createReply" isPostingMessage=false rows=2 action="Répondre" placeholder="Qu'en pensez-vous ?" id="post-Message__text"/>
 
         <div class="Replies">
-            <h2>Commentaires</h2>
-            <Reply isAuthorized v-for="(reply, index) in replies" :key="index" :author="reply.author" :text="reply.text"/>
+            <h2>{{replyCount}} commentaires</h2>
+            <Reply isAuthorized v-for="(reply, index) in replies" :key="index" :author="reply.author" :content="reply.content"/>
         </div>
 
     </section>
@@ -22,25 +22,18 @@
         components: {
             Message, SubmitForm, Reply
         },
-        data() {
-            return {
-                title: 'Extra Life Café, dernier bastion de l\'arcade à Paris',
-                author: 'Yannick',
-                content: 'Entre modernité et tradition, un café vraiment pas piqué des hannetons. Je recommande chaudement.',
-                replyNumber: 3,
-            }
-        },
         computed: {
             ...mapState({
                 messages: "messages",
-                replies: "replies"
+                replies: "replies",
+                replyCount: "replyCount"
             })
         },
         beforeMount() {
-            this.getOnePost()
+            this.getOnePost(), this.getReplies()
         },
         methods: {
-            ...mapActions(['getOnePost'])
+            ...mapActions(['getOnePost','getReplies'])
         },
     }
 </script>

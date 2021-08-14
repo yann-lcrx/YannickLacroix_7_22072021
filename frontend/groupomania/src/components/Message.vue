@@ -6,8 +6,7 @@
         </div>
         <p>{{ content }}</p>
         <div class="message__footer">
-            <p>{{ author }} | </p>
-            <router-link to="message#commentaires"><p v-if="singleMessage">{{ replyNumber }} commentaires | </p></router-link>
+            <p>{{ author }} </p>
             <router-link to="/homepage"><p v-if="isAuthorized == true && singleMessage == true">Supprimer</p></router-link>
         </div>
     </div></router-link>
@@ -37,7 +36,7 @@ export default {
             font-size: .9rem;
             display: flex;
             flex-flow: nowrap row;
-            :nth-child(3) {
+            :nth-child(2) {
                 color: darken(#aa2f18, 6);
             }
             p {

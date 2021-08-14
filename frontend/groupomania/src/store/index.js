@@ -6,11 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     messages: [],
-    replies: [
-      {id: 1, author: "François", content:"C'est génial", postId:"1"},
-      {id: 2, author: "Michel", content:"C'est pas mal", postId:"1"},
-      {id: 3, author: "Cerise", content:"C'est franchement pas terrible", postId:"2"}
-    ],
+    replies: [],
+    replyCount: 0,
     loggedInUser: {
       name: "Yannick",
       email: "faussebonneemail@gmail.com",
@@ -32,10 +29,21 @@ export default new Vuex.Store({
       state.messages.push(post)
     },
 
-     CREATE_POST(state, post) {
+    //TODO déterminer utilité
+    CREATE_POST(state, post) {
       state.messages.push(post);
     },
 
+    GET_REPLIES(state, replies) {
+      state.replies = [];
+      state.replyCount = 0;
+      for (let reply of replies) {
+        state.replies.push(reply);
+        state.replyCount++;
+      }
+    },
+
+    //TODO déterminer utilité
     CREATE_REPLY(state, reply) {
       state.replies.push(reply);
     },
@@ -103,6 +111,21 @@ export default new Vuex.Store({
       .catch(function(err) {
         console.error(err)
       })
+    },
+
+    async getReplies(context) {
+      let postId = (new URL(window.location.href).searchParams.toString()).slice(3);
+      await fetch('http://localhost:3000/api/replies/' + postId, {
+        headers: { "authorization" : "bearer "+ this.state.loggedInUser.token }
+        })
+        .then(res => res.json())
+        .then(replies => {
+          console.log(replies);
+          context.commit('GET_REPLIES', replies.replies)
+        })
+        .catch(function(err) {
+          console.error(err)
+        })
     },
 
     async signupUser(context, payload) {
