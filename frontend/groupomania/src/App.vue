@@ -2,16 +2,6 @@
   <div id="app">
     <Header @logout-click="logout" :isConnected="isConnected" />
     <div class="container">
-      <div id="nav">
-        <router-link to="/">Vue Home</router-link> |
-        <router-link to="/login">Login</router-link> |
-        <router-link to="/signup">Signup</router-link> |
-        <router-link to="/homepage">Home</router-link> |
-        <router-link to="/new">New</router-link> |
-        <router-link to="/message">Read</router-link> |
-        <router-link to="/profile">Account settings</router-link> |
-        
-      </div>
       <router-view />
     </div>
     <Footer v-if="messageList() == false"/>
@@ -51,19 +41,6 @@ $col-text: #2c3e50;
   -moz-osx-font-smoothing: grayscale;
   color: $col-text;
   background-color: #eeeeee;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: $col-text;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 
 .container {

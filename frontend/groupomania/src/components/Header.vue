@@ -31,11 +31,13 @@ export default {
 <style lang="scss" scoped>
 .header {
   width: 100%;
-  height: 100px;
+  height: 85px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   background-color: #080f88;
+  margin-bottom: 32px;
+
   > a {
     align-self: center;
   }

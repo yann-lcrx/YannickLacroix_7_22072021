@@ -1,13 +1,10 @@
 <template>
     <div class="message-list">
         <aside>
-            <div>
-                <div class="card">
-                    <h1>Accueil</h1>
-                    <p>Bienvenue sur votre page d'accueil.</p>
-                    <Button text="Ecrire un message" btnclass="btn btn--blue" link="new"/>
-                </div>
-                <Footer />
+            <div class="card">
+                <h1>Accueil</h1>
+                <p>Bienvenue sur votre page d'accueil.</p>
+                <router-link to="new"><Button text="Ecrire un message" btnclass="btn btn--blue"/></router-link>
             </div>
         </aside>
         <section>
@@ -19,32 +16,21 @@
 <script>
     import Message from "@/components/Message";
     import Button from "@/components/Button";
-    import Footer from "@/components/Footer";
     import { mapState, mapActions } from 'vuex'
     
 
     export default {
         name: "MessageList",
         components: {
-            Message, Button, Footer
-        },
-        data() {
-            return {
-                messageList: true,
-                messageId: this.message.id,
-                baseLink: "/homepage?id="
-            }
+            Message, Button
         },
         beforeMount() {
             this.getSeveralPosts()
         },
         methods: {
             ...mapActions(['getSeveralPosts']),
-            getFormattedLink() {
-                console.log(this.data.baseLink);
-                console.log(this.data.messageId);
-                console.log(this.data.baseLink + this.data.messageId);
-                return this.data.baseLink + this.data.messageId;
+            messageList() {
+                return true;
             }
         },
         computed: {
@@ -58,7 +44,8 @@
 <style lang="scss" scoped>
     .message-list {
         display: flex;
-        flex-flow: row-reverse nowrap
+        flex-flow: row-reverse nowrap;
+        margin-bottom: 24px
     }
     section {
         flex: 1;

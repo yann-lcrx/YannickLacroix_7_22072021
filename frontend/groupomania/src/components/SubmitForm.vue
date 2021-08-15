@@ -1,12 +1,12 @@
 <template>
   <div>
     <form v-if="isPostingMessage == true" @submit.prevent="emitPostEvent">
-        <input v-model="title"  :maxlength="maxlength" id="post-message__title" placeholder="Titre" />
-        <textarea v-model="text" :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
+        <input v-model="title"  :minlength="title-minlength" :maxlength="maxlength" id="post-message__title" placeholder="Titre" required />
+        <textarea v-model="text" :minlength="minlength" :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
         <Button type="submit" btnclass="btn btn--blue" :text="action" link="message"/>
     </form>
     <form v-else @submit.prevent="emitReplyEvent">
-        <textarea v-model="text" :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
+        <textarea v-model="text" :minlength="minlength" :id="id" :name="id" :rows="rows" :placeholder="placeholder" required></textarea>
         <Button type="submit" btnclass="btn btn--blue" :text="action" link="message"/>
     </form>
   </div>
@@ -31,6 +31,8 @@ export default {
     },
     data() {
         return {
+            titleminlength: 8,
+            minlength: 16,
             maxlength: 64,
             title: "",
             text: "",

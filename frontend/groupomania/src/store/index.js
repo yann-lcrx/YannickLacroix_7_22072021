@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "../router/index.js";
 
 Vue.use(Vuex);
 
@@ -44,11 +45,6 @@ export default new Vuex.Store({
     //TODO déterminer utilité
     CREATE_REPLY(state, reply) {
       state.replies.push(reply);
-    },
-
-    CREATE_USER(state, user) {
-      state.users.push(user);
-      //TODO déterminer que faire de cette fonction
     },
 
     LOGIN_USER(state, user) {
@@ -113,7 +109,8 @@ export default new Vuex.Store({
         }
       })
       .then(function() {
-        context.commit('CREATE_POST', payload)
+        context.commit('CREATE_POST', payload);
+        router.push({ name: 'Homepage' })
       })
       .catch(function(err) {
         console.error(err)
@@ -148,7 +145,7 @@ export default new Vuex.Store({
     },
 
     async signupUser(context, payload) {
-      await fetch('http://localhost:3000/api/auth/signup', {
+      /*await fetch('http://localhost:3000/api/auth/signup', {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -156,52 +153,65 @@ export default new Vuex.Store({
         },
         body: JSON.stringify(payload)
       })
-      .then(function(res) {
-        if (res.ok) {
-          return res.json
-        }
-      })
+      .then(res => res.json)
       .then(function() {
-        context.commit('CREATE_USER', payload)
+        context.commit('CREATE_USER', payload);
+        router.push({ name: 'Login' })
       })
       .catch(function(err) {
         console.error(err)
       })
-    },
-    
-    async loginUser(context, payload) {
-      await fetch('http://localhost:3000/api/auth/login', {
+    },*/
+      try{
+        const res = await fetch('http://localhost:3000/api/auth/signup', {
           method: "POST",
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
           },
           body: JSON.stringify(payload)
-      })
-        .then(res => res.json())
-        .then(user => {
+        })
+        if (!res.ok) throw { res };
+        router.push({ name: 'Login' })
+      } catch {
+        console.error()
+      }
+    },
+
+    async loginUser(context, payload) {
+        try {
+          let res = await fetch('http://localhost:3000/api/auth/login', {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          })
+          if (!res.ok) throw { res };
+          const user = await res.json();
           localStorage.setItem('name', payload.name);
           this.state.loggedInUser.name = payload.name;
           context.commit('LOGIN_USER', user);
-        })
-        .catch(function(err) {
-          console.error(err)
-        })
+          router.push({ name: 'Homepage' })
+        } catch {
+          console.error()
+        }
     },
 
     async deleteUser(context, payload) {
-      await fetch('http://localhost:3000/api/auth/', {
-        method: "DELETE",
-        headers: this.getters.formattedHeaders,
-        body: JSON.stringify(payload)
-      })
-        .then(res => res.json())
-        .then(function() {
-          context.commit('LOGOUT')
+      try {
+        let res = await fetch('http://localhost:3000/api/auth/', {
+          method: "DELETE",
+          headers: this.getters.formattedHeaders,
+          body: JSON.stringify(payload)
         })
-        .catch(function(err) {
-          console.error(err)
-        })
+        if (!res.ok) throw { res };
+        context.commit('LOGOUT');
+        router.push({ name: 'Signup' })
+      } catch {
+        console.error()
+      }
     },
 
     async logout(context) {

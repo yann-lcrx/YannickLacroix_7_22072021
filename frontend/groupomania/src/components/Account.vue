@@ -5,7 +5,7 @@
             <p>Nom d'utilisateur: <span class="profile__info">{{loggedInUser.name}}</span></p>
             <form @submit.prevent="emitUserEvent" class="profile__buttons">
                 <Button type="submit" btnclass="btn btn--red" text="Supprimer le compte" />
-                <Button link="/homepage" btnclass="btn btn--blue" text="Retour" />
+                <router-link to="homepage"><Button btnclass="btn btn--blue" text="Retour" /></router-link>
             </form>
         </div>
     </section>
