@@ -9,6 +9,7 @@ function sanitize(stringsToSanitize, blacklist) {
 
 /**
  * @typedef {Object} loginAnswer
+ * @property {String} name
  * @property {Number} id
  * @property {String} role
  */

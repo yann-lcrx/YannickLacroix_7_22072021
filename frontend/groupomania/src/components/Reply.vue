@@ -2,7 +2,7 @@
     <div class="reply card">
         <div class="reply__info">
             <p>{{ author }}</p>
-            <router-link to="/message"><p>Supprimer</p></router-link>
+            <router-link to="/message"><p v-if="isAuthorized == true" @click="emitDeleteEvent">Supprimer</p></router-link>
         </div>
         <p>{{ content }}</p>
     </div>
@@ -18,6 +18,13 @@ export default {
             author: String,
             content: String
         },
+        methods: {
+         emitDeleteEvent() {
+            this.$emit('del-post-click', {
+                id_user: this.loggedInUser.id
+            })   
+        }
+    },
     }
 </script>
 

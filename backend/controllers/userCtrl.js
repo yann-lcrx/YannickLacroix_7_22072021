@@ -13,7 +13,9 @@ exports.loginCtrl = async (req, res, next) => {
             throw({status:401, msg:"Mot de passe incorrect !"});
         }
         res.status(200).json({
+          name     : user.name,
           id_user   : user.id,
+          role      : user.role,
           token     : jwt.sign({ id_user: user.id, role: user.role }, process.env.DB_TOKENENCRYPTIONKEY, {
             expiresIn: "24h",
           }),

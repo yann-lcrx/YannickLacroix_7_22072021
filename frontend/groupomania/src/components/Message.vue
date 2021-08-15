@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="link"> <div class="message card">
+    <div class="message card">
         <div>
             <h1 v-if="singleMessage">{{ title }}</h1>
             <h2 v-else>{{ title }}</h2>
@@ -7,25 +7,40 @@
         <p>{{ content }}</p>
         <div class="message__footer">
             <p>{{ author }} </p>
-            <router-link to="/homepage"><p v-if="isAuthorized == true && singleMessage == true">Supprimer</p></router-link>
+            <p v-if="isAuthorized == true && singleMessage == true" @click="emitDeleteEvent">Supprimer</p>
         </div>
-    </div></router-link>
+    </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
     name: "Message",
     props: {
-        isAuthorized: Boolean,
         title: String,
         author: String,
         content: String,
         replyNumber: Number,
         userId: Number,
         singleMessage: Boolean,
-        link: String
+        link: String,
+        isAuthorized: Boolean
     },
+    methods: {
+        emitDeleteEvent() {
+            this.$emit('del-post-click', {
+                id_user: this.loggedInUser.id
+            })   
+        }
+    },
+    computed: {
+        ...mapState({
+            loggedInUser: 'loggedInUser'
+        })
+    }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -38,6 +53,7 @@ export default {
             flex-flow: nowrap row;
             :nth-child(2) {
                 color: darken(#aa2f18, 6);
+                cursor: pointer;
             }
             p {
                 margin-right: 6px

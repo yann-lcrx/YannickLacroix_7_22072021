@@ -8,7 +8,9 @@
             </div>
         </aside>
         <section>
-            <Message isAuthorized v-for="(message, index) in messages" :key="index" :title="message.title" :author="message.author" :content="message.content" :link="'/message?id=' + message.id" />
+            <div v-for="(message, index) in messages" :key="index">
+                <router-link :to="'/message?id=' + message.id"><Message isAuthorized :title="message.title" :author="message.author" :content="message.content" /></router-link>
+            </div>                   
         </section>
     </div>
 </template>

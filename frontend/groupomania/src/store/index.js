@@ -9,6 +9,7 @@ export default new Vuex.Store({
     messages: [],
     replies: [],
     replyCount: 0,
+    isAdmin: false,
     loggedInUser: {
       name: localStorage.getItem('name'),
       id: parseFloat(localStorage.getItem('userId')),
@@ -28,9 +29,12 @@ export default new Vuex.Store({
       state.messages.push(post)
     },
 
-    //TODO déterminer utilité
     CREATE_POST(state, post) {
       state.messages.push(post);
+    },
+
+    DELETE_POST(state) {
+      state.messages = [];
     },
 
     GET_REPLIES(state, replies) {
@@ -42,23 +46,34 @@ export default new Vuex.Store({
       }
     },
 
-    //TODO déterminer utilité
     CREATE_REPLY(state, reply) {
       state.replies.push(reply);
     },
 
     LOGIN_USER(state, user) {
+      if(user.role == "admin") {
+        console.log(user.role);
+        state.isAdmin = true;        
+      } else {
+        console.log(user.role);
+        state.isAdmin = false;
+      }
+      localStorage.setItem('role', user.role)
       localStorage.setItem('token', user.token);
       state.loggedInUser.token = user.token;
       localStorage.setItem('userId', user.id_user);
       state.loggedInUser.id = user.id_user
     },
 
-    LOGOUT() {
+    LOGOUT(state) {
+      state.isAdmin = false;
+      state.loggedInUser.token = "";
+      state.loggedInUser.name = "";
+      state.loggedInUser.id = null;
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
       localStorage.removeItem('name');
-      console.log('déconnecté')
+      localStorage.removeItem('role');
     }
   },
   getters: {
@@ -117,6 +132,22 @@ export default new Vuex.Store({
       })
     },
 
+    async deletePost(context, payload) {
+      try {
+        let postId = (new URL(window.location.href).searchParams.toString()).slice(3);
+        let res = await fetch('http://localhost:3000/api/posts/' + postId, {
+          method: "DELETE",
+          headers: this.getters.formattedHeaders,
+          body: JSON.stringify(payload)
+        })
+        if (!res.ok) throw { res };
+        context.commit('DELETE_POST');
+        router.push({ name: 'Homepage' })
+      } catch {
+        console.error()
+      }
+    },
+
     async getReplies(context) {
       let postId = (new URL(window.location.href).searchParams.toString()).slice(3);
       await fetch('http://localhost:3000/api/replies/' + postId, {
@@ -132,7 +163,6 @@ export default new Vuex.Store({
     },
 
     async createReply(context, payload) {
-      console.log(payload);
       await fetch('http://localhost:3000/api/replies', {
         method: "POST",
         headers: this.getters.formattedHeaders,
@@ -140,7 +170,7 @@ export default new Vuex.Store({
       })
       .then(res => res.json)
       .then(function() {
-        router.push({ path: `/message?id=${payload.id_post}#Commentaires` })
+        location.reload()
       })
       .catch(function(err) {
         console.error(err)

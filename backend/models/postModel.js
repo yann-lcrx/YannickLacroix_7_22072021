@@ -62,9 +62,9 @@ module.exports.createPost = async function(id_user, content, title) {
  * @param   {Number}  id_user  
  */
 module.exports.deletePost = async function(id, id_user) {
-    const postExists = await database.getOne("SELECT * FROM post WHERE id = ? AND id_user = ?", [id, id_user])
+    const postExists = await database.getOne("SELECT * FROM post WHERE id = ?", [id])
     if (!postExists) {
         throw error;
     }
-    await database.getData("DELETE FROM post WHERE id = ? AND id_user = ?", [id, id_user])
+    await database.getData("DELETE FROM post WHERE id = ?", [id])
 }
