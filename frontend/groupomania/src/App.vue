@@ -47,11 +47,11 @@ $col-text: #2c3e50;
   max-width: 80%;
   margin: auto;
   > div {
-    max-width: 1240px;
+    max-width: 900px;
     margin: auto;
   }
   > section {
-    max-width: 1240px;
+    max-width: 900px;
     margin: auto;
   }
 }

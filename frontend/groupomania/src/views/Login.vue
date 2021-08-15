@@ -1,6 +1,6 @@
 <template>
     <div>
-        <UserForm link="/homepage" formType="login" @form-submit="loginUser" :buttonLabel="btnLabel" :buttonClass="btnClass"/>    
+        <UserForm link="/homepage" question="Vous n'avez pas de compte ? Inscrivez-vous" alternativeUrl="/signup" formType="login" @form-submit="loginUser" :buttonLabel="btnLabel" :buttonClass="btnClass"/>    
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <UserForm isSignup link="/homepage" formType="signup" @form-submit="signupUser" :buttonLabel="btnLabel" :buttonClass="btnClass"/>    
+        <UserForm isSignup link="/homepage" question="Vous avez déjà un compte ? Connectez-vous" alternativeUrl="/" formType="signup" @form-submit="signupUser" :buttonLabel="btnLabel" :buttonClass="btnClass"/>    
     </div>
 </template>
 

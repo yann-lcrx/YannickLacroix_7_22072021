@@ -4,7 +4,10 @@
         <SubmitForm @reply-click="createReply" rows=2 action="Répondre" placeholder="Qu'en pensez-vous ?" id="post-Message__text"/>
 
         <div class="Replies">
-            <h2>{{replyCount}} commentaires</h2>
+            <div>
+                <h2>Commentaires</h2>
+                <p>({{replyCount}})</p>
+            </div>
             <Reply isAuthorized v-for="(reply, index) in replies" :key="index" :author="reply.author" :content="reply.content"/>
         </div>
 
@@ -41,5 +44,9 @@
 <style lang="scss" scoped>
     form {
         margin-bottom: 32px
+    }
+    .Replies > div {
+        display: flex;
+        flex-flow: row nowrap;
     }
 </style>

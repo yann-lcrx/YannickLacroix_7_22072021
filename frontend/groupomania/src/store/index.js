@@ -139,29 +139,15 @@ export default new Vuex.Store({
         body: JSON.stringify(payload)
       })
       .then(res => res.json)
+      .then(function() {
+        router.push({ path: `/message?id=${payload.id_post}#Commentaires` })
+      })
       .catch(function(err) {
         console.error(err)
       })
     },
 
     async signupUser(context, payload) {
-      /*await fetch('http://localhost:3000/api/auth/signup', {
-        method: "POST",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-      .then(res => res.json)
-      .then(function() {
-        context.commit('CREATE_USER', payload);
-        router.push({ name: 'Login' })
-      })
-      .catch(function(err) {
-        console.error(err)
-      })
-    },*/
       try{
         const res = await fetch('http://localhost:3000/api/auth/signup', {
           method: "POST",

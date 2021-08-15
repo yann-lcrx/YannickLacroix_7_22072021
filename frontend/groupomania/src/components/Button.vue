@@ -30,6 +30,7 @@ export default {
     }
     .btn {
         color: #fefefe;
+        cursor: pointer;
         text-decoration: none;
         padding: 12px;
         border-radius: 6px;

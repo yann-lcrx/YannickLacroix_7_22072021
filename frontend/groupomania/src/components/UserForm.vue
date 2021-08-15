@@ -11,8 +11,8 @@
                     <input v-model="email" v-if="isSignup == true" id="email" placeholder="Adresse électronique" type="email" required />
                     <div class="buttons">
                         <Button :link="link" type="submit" :btnclass="buttonClass" :text="buttonLabel" />
-                    </div>  
-                    <p>Mot de passe oublié ? Cliquez <a href="google.com">ici</a>.</p>
+                    </div>
+                    <p>{{ question }} <router-link :to="alternativeUrl">ici</router-link>.</p>
             </form>
         </div>
     </section>
@@ -40,7 +40,9 @@
             buttonLabel: String,
             buttonClass: String,
             link: String,
-            isSignup: Boolean
+            isSignup: Boolean,
+            question: String,
+            alternativeUrl: String
         },
         data() {
             return {

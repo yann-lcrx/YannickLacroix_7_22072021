@@ -4,7 +4,7 @@
       <nav class="header__nav" >
           <ul>
             <li><router-link to="/profile">Profil</router-link></li>
-            <li @click="emitLogoutEvent"><router-link to="/login">Se déconnecter</router-link></li>
+            <li @click="emitLogoutEvent"><router-link to="/">Se déconnecter</router-link></li>
           </ul>
       </nav>
     </header>
