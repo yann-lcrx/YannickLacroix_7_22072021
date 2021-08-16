@@ -50,6 +50,10 @@ export default new Vuex.Store({
       state.replies.push(reply);
     },
 
+    DELETE_REPLY(state) {
+      state.replies = []
+    },
+
     LOGIN_USER(state, user) {
       if(user.role == "admin") {
         console.log(user.role);
@@ -175,6 +179,21 @@ export default new Vuex.Store({
       .catch(function(err) {
         console.error(err)
       })
+    },
+
+    async deleteReply(context, payload) {
+      try {
+        let res = await fetch('http://localhost:3000/api/replies/' + payload.id, {
+          method: "DELETE",
+          headers: this.getters.formattedHeaders,
+          body: JSON.stringify({id_user: payload.id_user})
+        })
+        if (!res.ok) throw { res };
+        context.commit('DELETE_REPLY');
+        router.push({ path: `/homepage` })
+      } catch {
+        console.error()
+      }
     },
 
     async signupUser(context, payload) {

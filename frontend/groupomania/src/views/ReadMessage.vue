@@ -8,7 +8,7 @@
                 <h2>Commentaires</h2>
                 <p>({{replyCount}})</p>
             </div>
-            <Reply v-for="(reply, index) in replies" :key="index" :author="reply.author" :content="reply.content" :isAuthorized="isAdmin" />
+            <Reply v-for="(reply) in replies" :key="reply.id" :author="reply.author" :content="reply.content" :isAuthorized="isAdmin" :id="reply.id" @del-reply-click="deleteReply" />
         </div>
 
     </section>

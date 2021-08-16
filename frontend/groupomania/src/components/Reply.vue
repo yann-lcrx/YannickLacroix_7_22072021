@@ -1,31 +1,40 @@
 <template>
     <div class="reply card">
         <div class="reply__info">
-            <p>{{ author }}</p>
-            <router-link to="/message"><p v-if="isAuthorized == true" @click="emitDeleteEvent">Supprimer</p></router-link>
+            <p>{{ id }}</p>
+            <p> | {{ author }} | </p>
+            <p v-if="isAuthorized == true" @click="emitDelReplyEvent">Supprimer</p>
         </div>
         <p>{{ content }}</p>
     </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-        name: "Reply",
-        props: {
-            id: Number,
-            postId: Number,
-            isAuthorized: Boolean,
-            author: String,
-            content: String
-        },
-        methods: {
-         emitDeleteEvent() {
-            this.$emit('del-post-click', {
-                id_user: this.loggedInUser.id
-            })   
-        }
+    name: "Reply",
+    props: {
+        id: Number,
+        postId: Number,
+        isAuthorized: Boolean,
+        author: String,
+        content: String
     },
+    methods: {
+        emitDelReplyEvent() {
+            this.$emit('del-reply-click', {
+                id_user: this.loggedInUser.id,
+                id: this.id
+            })   
+        },
+    },
+    computed: {
+        ...mapState({
+            loggedInUser: 'loggedInUser'
+        })
     }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -39,16 +48,23 @@ export default {
         &__info {
             display: flex;
             flex-flow: nowrap row;
-            justify-content: space-between;
             align-content: center;
-            :first-child {
-                font-weight: bold;
+            p {
+                margin-right: 8px
+            }
+            :first-child{
+                font-size: .8rem;
+                align-self: center;
             }
             :nth-child(2) {
+                font-weight: bold;
+            }
+            :nth-child(3) {
                 align-self: center;
                 text-decoration: underline;
                 font-size: .9rem;
                 color: darken(#aa2f18, 6);
+                cursor: pointer;
                 font-weight: unset
             }
         }
