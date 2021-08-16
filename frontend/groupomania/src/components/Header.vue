@@ -30,24 +30,32 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+  padding-left: 12px;
   width: 100%;
-  height: 85px;
+  height: 82px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   background-color: #080f88;
   margin-bottom: 32px;
-
+  *:focus {
+    border: 2px rgb(131, 48, 33) solid;
+    border-radius: 4px;
+    outline: 0;
+  }
   > a {
     align-self: center;
   }
   &__logo{
     max-width: 200px;
-    margin-left: 12px;
+    padding: 3px;
   }
   &__nav {
-    align-self: center; 
+    height: 100%;
     ul{
+      height: 100%;
+      margin-top: 0px;
+      margin-bottom: 0px;
       text-indent: 0px;
       list-style-type: none;
       color:#fefefe;
@@ -55,6 +63,7 @@ export default {
       display: flex;
       li {
         margin-right: 24px;
+        align-self: center;
       }
     }
   }

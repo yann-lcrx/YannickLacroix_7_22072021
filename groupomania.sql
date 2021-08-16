@@ -14,7 +14,7 @@ CREATE TABLE `post` (
   PRIMARY KEY (`id`),
   KEY `fk_id_user` (`id_user`),
   CONSTRAINT `fk_id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb3;
 
 DROP TABLE IF EXISTS reply;
 CREATE TABLE `reply` (
@@ -27,7 +27,7 @@ CREATE TABLE `reply` (
   KEY `fk_reply_id_user` (`id_user`),
   CONSTRAINT `fk_reply_id_post` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_reply_id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3;
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE `user` (
@@ -39,4 +39,4 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb3;

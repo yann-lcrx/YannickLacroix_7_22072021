@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @logout-click="logout" :isConnected="isConnected" />
-    <div class="container">
+    <div class="container" role="main">
       <router-view />
     </div>
     <Footer v-if="messageList() == false"/>
