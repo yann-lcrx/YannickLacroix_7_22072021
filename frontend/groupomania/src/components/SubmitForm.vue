@@ -26,8 +26,7 @@ export default {
         rows: Number,
         isPostingMessage: Boolean,
         placeholder: String,
-        id: String,
-        onClick: Function
+        id: String
     },
     data() {
         return {

@@ -15,9 +15,6 @@ async function request(sql, data=[]) {
 	const rows = await conn.query(sql, data);
   return rows;
 
-	// const res = await conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
-	// res: { affectedRows: 1, insertId: 1, warningStatus: 0 }
-
   } catch (err) {
 	throw err;
   } finally {

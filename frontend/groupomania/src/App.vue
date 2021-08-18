@@ -4,7 +4,7 @@
     <div class="container" role="main">
       <router-view />
     </div>
-    <Footer v-if="messageList() == false"/>
+    <Footer/>
   </div>
 </template>
 
@@ -19,9 +19,6 @@ import { mapActions } from 'vuex';
       Footer, Header
     },
   methods : {
-    messageList(){
-      return false;
-    },
     ...mapActions(['logout'])
   },
   data() {

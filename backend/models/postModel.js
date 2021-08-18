@@ -6,6 +6,7 @@ const database = require("./database");
  * @property {Number} id_user
  * @property {String} content
  * @property {String} title
+ * @property {String} author
  */
 
 /**

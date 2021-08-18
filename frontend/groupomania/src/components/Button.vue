@@ -1,6 +1,5 @@
 <template>
     <div class="button">
-        <!--<router-link :to="link"><button :class="type">{{ text }}</button></router-link>-->
         <button :type="type" :class="btnclass">{{ text }}</button>
     </div>
 </template>
