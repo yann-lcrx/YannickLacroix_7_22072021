@@ -4,8 +4,8 @@
 
 ### Back-end
 Exécuter les commandes suivantes:
-``cd backend
-npm i``
+``cd backend``
+``npm i``
 
 À la racine du dossier, créer un dossier intitulé .env, copier/coller et compléter les champs suivants:
 ``DB_HOST=
